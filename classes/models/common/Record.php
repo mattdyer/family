@@ -12,7 +12,7 @@
 		protected $LastSQL;
 		protected $IDColumn;
 		protected $KeyList;
-		protected $QuotedTypes = array('varchar','text','datetime');
+		protected $QuotedTypes = array('varchar','text','datetime','date');
 		protected $mysqli;
 		
 		function __construct($TableName,$Database,$Server,$Username,$Password){
@@ -21,13 +21,20 @@
 			$this->Server = $Server;
 			$this->Username = $Username;
 			$this->Password = $Password;
+			
+			$this->loadColumns();
+			
+		}
+		
+		
+		function loadColumns(){
 			$this->QueryDatabase = "Information_Schema";
 			
 			$columns = $this->DoQuery("SELECT Column_Name,Column_Type,Column_Key
 						   			  FROM Columns
 						   			  WHERE Table_Schema = '$this->Database' AND Table_Name = '$this->TableName';", []);
 			
-			$this->QueryDatabase = $Database;
+			$this->QueryDatabase = $this->Database;
 			
 			while($row = $columns->fetch_array(MYSQLI_ASSOC)){
 				
@@ -48,8 +55,16 @@
 					$this->KeyList = $this->KeyList . ',' . $key;
 				}
 			}
-			
 		}
+		
+		
+		function reset(){
+			foreach($this->fields as $key => $value){
+				$this->set($key, '');
+			}
+		}
+		
+		
 		function debug(){
 			$typelist = '';
 			foreach($this->types as $type)
@@ -82,6 +97,38 @@
 				}
 			}
 		}
+		
+		
+		function loadBy($equalsValues){
+			
+			$findSQL = "SELECT $this->KeyList
+						   FROM $this->TableName
+						   WHERE ";
+			
+			foreach($equalsValues as $key => $value){
+				if(isset($this->fields[$key])){
+					if(in_array($this->types[$key],$this->QuotedTypes)){
+						$findSQL = $findSQL . "`$key` = '$value' AND";
+					}else{
+						$findSQL = $findSQL . "`$key` = $value AND";
+					}
+				}
+			}
+			
+			$findSQL = $findSQL . " 1 = 1";
+			
+			$record = $this->DoQuery($findSQL, []);
+			
+			if($record->num_rows != 1){
+				throw new Exception("$record->num_rows records found in ' . $this->TableName .  ' for provided values. Expected 1.");
+			}
+			
+			$row = $record->fetch_array();
+			
+			$this->load($row[$this->IDColumn]);
+			
+		}
+		
 		
 		function save(){
 			$this->beforeSave();
@@ -167,7 +214,7 @@
 			$this->fields[ $key ] = $value;
 			return 'true';
 		  }
-		  die('Column not found');
+		  die("Column not found $key in table {$this->TableName}");
 		  //return 'false';
 		}
 		
@@ -229,5 +276,67 @@
 			return $result;
 			
 		}
+		
+		protected function createTable($tableName, $columns){
+			
+			$dropSQL = "DROP TABLE IF EXISTS $tableName;";
+			
+			$this->DoQuery($dropSQL, []);
+			
+			$createSQL = "CREATE TABLE IF NOT EXISTS $tableName(";
+			
+			$primaryKey = [];
+			
+			foreach($columns as $key => $column){
+				
+				$columnSQL = '';
+				
+				if($column['primaryKey']){
+					array_push($primaryKey, "`{$column['name']}`");
+				}
+				
+				//$columnSQL = "{$column['name']} NOT NULL";
+				$columnSQL = "`{$column['name']}` {$column['type']}";
+				
+				if($column['allowNull']){
+					$columnSQL = "$columnSQL NULL";
+				}else{
+					$columnSQL = "$columnSQL NOT NULL";
+				}
+				
+				$columnSQL = "$columnSQL {$column['extra']}";
+				
+				$createSQL = $createSQL . ' ' . $columnSQL;
+				
+				if($key + 1 < sizeof($columns)){
+					$createSQL = $createSQL . ',';
+				}
+			}
+			
+			if(sizeof($primaryKey)){
+				$createSQL = $createSQL . ",PRIMARY KEY (" . join(',', $primaryKey) . ")";
+			}
+			
+			$createSQL = $createSQL . ') ENGINE=InnoDB AUTO_INCREMENT=1;';
+			
+			//var_dump($createSQL);
+			
+			$this->DoQuery($createSQL, []);
+			
+		}
+		
+		
+		function addRecords($records){
+			
+			$this->loadColumns();
+			
+			foreach($records as $key => $record){
+				$this->reset();
+				$this->updateAttributes($record);
+				$this->save();
+			}
+			
+		}
+		
 	}
 ?>

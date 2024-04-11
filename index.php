@@ -12,8 +12,5 @@
 		print($response->getContent());
 	}
 	
-	//$person = LoadClass(SiteRoot . '/classes/models/people/Person');
-	
-	//$person->setupTable();
 	
 ?>

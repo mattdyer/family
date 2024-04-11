@@ -1,17 +1,13 @@
 <?php
 	require_once(SiteRoot . '/classes/models/common/Record.php');
-	class Person extends Record{
+	class Marriages extends Record{
 		function __construct(){
-			record::__construct('people','family','familydbphp','root','example');
+			record::__construct('marriages','family','familydbphp','root','example');
 		}
 		
 		function beforeSave(){
 			if (strlen($this->fields[$this->IDColumn]) == 0){
-				$this->set('dateEntered', date("Y-m-d H:i:s", time()));
-				
-				$birthDate = $this->get('birthDate');
-				$this->set('identifier', "{$this->get('firstName')}{$this->get('lastName')}{$birthDate}");
-				
+				$this->set('dateEntered',date("Y-m-d H:i:s", time()) );
 			}
 		}
 		
@@ -28,17 +24,17 @@
 					"extra" => "auto_increment"
 				],
 				[
-					"name" => "identifier",
-					"type" => "varchar(255)",
+					"name" => "spouseID1",
+					"type" => "int",
 					"primaryKey" => false,
 					"allowNull" => false,
 					"extra" => ""
 				],
 				[
-					"name" => "firstName",
-					"type" => "varchar(100)",
+					"name" => "spouseID2",
+					"type" => "int",
 					"primaryKey" => false,
-					"allowNull" => true,
+					"allowNull" => false,
 					"extra" => ""
 				],
 				[
@@ -49,15 +45,15 @@
 					"extra" => ""
 				],
 				[
-					"name" => "birthDate",
+					"name" => "startDate",
 					"type" => "date",
 					"primaryKey" => false,
-					"allowNull" => true,
+					"allowNull" => false,
 					"extra" => ""
 				],
 				[
-					"name" => "birthDateDisplay",
-					"type" => "varchar(100)",
+					"name" => "endDate",
+					"type" => "datetime",
 					"primaryKey" => false,
 					"allowNull" => true,
 					"extra" => ""
@@ -71,13 +67,39 @@
 				]
 			];
 			
-			
 			$this->createTable($tableName, $columns);
+			
+			$records = $this->translateIdentifiers($records);	
 			
 			$this->addRecords($records);
 			
+			
 		}
 		
+		
+		function translateIdentifiers($records){
+			
+			$person = LoadClass(SiteRoot . '/classes/models/people/Person');
+			
+			$newRecords = [];
+			
+			foreach($records as $key => $value){
+				$person->reset();
+				$person->loadBy(["identifier" => $value['spouseID1']]);
+				
+				$value['spouseID1'] = $person->get('id');
+				
+				$person->reset();
+				$person->loadBy(["identifier" => $value['spouseID2']]);
+				
+				$value['spouseID2'] = $person->get('id');
+				
+				array_push($newRecords, $value);
+				
+			}
+			
+			return $newRecords;
+		}
 		
 	}
 ?>
