@@ -37,17 +37,15 @@
 			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
 			$personObj->load($personID);
 			
-			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
-			
 			$person = $personObj->getFields();
 			
 			$tree = [[$person]];
 			
-			array_push($tree, addParents($person, $depth));
+			array_push($tree, $this->addParents($personObj, $depth));
 			
-			//$parents = $personController->getParents($personObj);
-			//$children = $personController->getChildren($personObj);
-			//$siblings = $personController->getSiblings($personObj);
+			//$parents = $personController->getParents($personID);
+			//$children = $personController->getChildren($personID);
+			//$siblings = $personController->getSiblings($personID);
 			
 			
 			//$tree = $children;
@@ -56,13 +54,14 @@
 		}
 		
 		
-		function addParents($person, $depth){
-			$parents = $personController->getParents($personObj);
+		function addParents($personObj, $depth){
 			
-			if(sizeof($parents)){
-				foreach()
-			}
+			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
 			
+			$parents = $personController->getParents($personObj->get('id'));
+			
+			
+			return $parents;
 		}
 		
 		

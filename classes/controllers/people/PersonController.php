@@ -5,13 +5,14 @@
 		}
 		
 		
-		function getParents($personObj){
+		function getParents($personID){
 			
+			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
 			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
 			
 			$parentRelationships = $parentChild->findBy([
 				"equalsValues" => [
-					"childID" => $personObj->get('id')
+					"childID" => $personID
 				]
 			]);
 			
@@ -29,13 +30,14 @@
 		}
 		
 		
-		function getChildren($personObj){
+		function getChildren($personID){
 			
+			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
 			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
 			
 			$childRelationships = $parentChild->findBy([
 				"equalsValues" => [
-					"parentID" => $personObj->get('id')
+					"parentID" => $personID
 				]
 			]);
 			
@@ -53,12 +55,14 @@
 		}
 		
 		
-		function getSiblings($personObj){
+		function getSiblings($personID){
+			
+			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
 			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
 			
 			$parentRelationships = $parentChild->findBy([
 				"equalsValues" => [
-					"childID" => $personObj->get('id')
+					"childID" => $personID
 				]
 			]);
 			
