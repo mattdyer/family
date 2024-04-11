@@ -12,7 +12,7 @@
 			
 			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
 			
-			$view = LoadClass(SiteRoot . '/classes/views/common/SetupView');
+			$view = LoadClass(SiteRoot . '/classes/views/setup/SetupView');
 			
 			$content = $view->getPageContent();
 			
@@ -87,6 +87,34 @@
 				[
 					"parentID" => "MatthewDyer1979-12-20",
 					"childID" => "JacobDyer2010-03-05"
+				],
+				[
+					"parentID" => "JessicaDavid1983-11-03",
+					"childID" => "JacobDyer2010-03-05"
+				],
+				[
+					"parentID" => "MatthewDyer1979-12-20",
+					"childID" => "WilliamDyer2012-02-21"
+				],
+				[
+					"parentID" => "JessicaDavid1983-11-03",
+					"childID" => "WilliamDyer2012-02-21"
+				],
+				[
+					"parentID" => "MatthewDyer1979-12-20",
+					"childID" => "TerryDyer2013-07-07"
+				],
+				[
+					"parentID" => "JessicaDavid1983-11-03",
+					"childID" => "TerryDyer2013-07-07"
+				],
+				[
+					"parentID" => "MatthewDyer1979-12-20",
+					"childID" => "KatherineDyer2015-12-04"
+				],
+				[
+					"parentID" => "JessicaDavid1983-11-03",
+					"childID" => "KatherineDyer2015-12-04"
 				]
 			];
 			

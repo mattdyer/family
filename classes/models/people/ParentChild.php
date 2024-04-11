@@ -64,12 +64,12 @@
 			
 			foreach($records as $key => $value){
 				$person->reset();
-				$person->loadBy(["identifier" => $value['parentID']]);
+				$person->loadBy(["equalsValues" => ["identifier" => $value['parentID']]]);
 				
 				$value['parentID'] = $person->get('id');
 				
 				$person->reset();
-				$person->loadBy(["identifier" => $value['childID']]);
+				$person->loadBy(["equalsValues" => ["identifier" => $value['childID']]]);
 				
 				$value['childID'] = $person->get('id');
 				

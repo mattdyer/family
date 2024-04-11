@@ -73,6 +73,13 @@
 			}
 			return $typelist;
 		}
+		
+		
+		function getFields(){
+			return $this->fields;
+		}
+		
+		
 		function updateAttributes($newAtts){
 			foreach($this->fields as $field => $value){
 				if(array_key_exists($field, $newAtts)){
@@ -99,34 +106,68 @@
 		}
 		
 		
-		function loadBy($equalsValues){
+		function loadBy($values){
+			
+			$records = $this->findBy($values);
+			
+			if(sizeof($records) != 1){
+				throw new Exception(sizeof($records) . " records found in ' . $this->TableName .  ' for provided values. Expected 1.");
+			}
+			
+			$row = $records[0];
+			
+			$this->load($row[$this->IDColumn]);
+			
+		}
+		
+		
+		function findBy($values){
 			
 			$findSQL = "SELECT $this->KeyList
 						   FROM $this->TableName
 						   WHERE ";
 			
-			foreach($equalsValues as $key => $value){
-				if(isset($this->fields[$key])){
-					if(in_array($this->types[$key],$this->QuotedTypes)){
-						$findSQL = $findSQL . "`$key` = '$value' AND";
-					}else{
-						$findSQL = $findSQL . "`$key` = $value AND";
+			if(isset($values['equalsValues'])){
+				foreach($values['equalsValues'] as $key => $value){
+					if(isset($this->fields[$key])){
+						if(in_array($this->types[$key],$this->QuotedTypes)){
+							$findSQL = $findSQL . "`$key` = '$value' AND";
+						}else{
+							$findSQL = $findSQL . "`$key` = $value AND";
+						}
 					}
 				}
+				
+				$findSQL = $findSQL . " 1 = 1";
 			}
 			
-			$findSQL = $findSQL . " 1 = 1";
 			
-			$record = $this->DoQuery($findSQL, []);
-			
-			if($record->num_rows != 1){
-				throw new Exception("$record->num_rows records found in ' . $this->TableName .  ' for provided values. Expected 1.");
+			if(isset($values['inListValues'])){
+				foreach($values['inListValues'] as $key => $value){
+					if(isset($this->fields[$key]) AND sizeof($value)){
+						if(in_array($this->types[$key],$this->QuotedTypes)){
+							$findSQL = $findSQL . "`$key` IN (" . join("','", $value) . ") AND";
+						}else{
+							$findSQL = $findSQL . "`$key` IN (" . join(",", $value) . ") AND";
+						}
+					}else{
+						$findSQL = $findSQL . "1 = 0 AND";
+					}
+				}
+				
+				$findSQL = $findSQL . " 1 = 1";
 			}
 			
-			$row = $record->fetch_array();
 			
-			$this->load($row[$this->IDColumn]);
+			$records = $this->DoQuery($findSQL, []);
 			
+			$results = [];
+			
+			while($row = $records->fetch_array()){
+				array_push($results, $row);
+			}
+			
+			return $results;
 		}
 		
 		

@@ -85,12 +85,12 @@
 			
 			foreach($records as $key => $value){
 				$person->reset();
-				$person->loadBy(["identifier" => $value['spouseID1']]);
+				$person->loadBy(["equalsValues" => ["identifier" => $value['spouseID1']]]);
 				
 				$value['spouseID1'] = $person->get('id');
 				
 				$person->reset();
-				$person->loadBy(["identifier" => $value['spouseID2']]);
+				$person->loadBy(["equalsValues" => ["identifier" => $value['spouseID2']]]);
 				
 				$value['spouseID2'] = $person->get('id');
 				
