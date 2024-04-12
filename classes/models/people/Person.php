@@ -63,6 +63,20 @@
 					"extra" => ""
 				],
 				[
+					"name" => "deathDate",
+					"type" => "date",
+					"primaryKey" => false,
+					"allowNull" => true,
+					"extra" => ""
+				],
+				[
+					"name" => "deathDateDisplay",
+					"type" => "varchar(100)",
+					"primaryKey" => false,
+					"allowNull" => true,
+					"extra" => ""
+				],
+				[
 					"name" => "dateEntered",
 					"type" => "datetime",
 					"primaryKey" => false,

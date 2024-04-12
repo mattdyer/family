@@ -75,6 +75,26 @@
 					"firstName" => "Katherine",
 					"lastName" => "Dyer",
 					"birthDate" => "2015-12-04"
+				],
+				[
+					"firstName" => "Ray",
+					"lastName" => "Dyer",
+					"birthDate" => "1951-03-31"
+				],
+				[
+					"firstName" => "Margo",
+					"lastName" => "Young",
+					"birthDate" => "1948-06-21"
+				],
+				[
+					"firstName" => "Ricky",
+					"lastName" => "David",
+					"birthDate" => "1900-01-01"
+				],
+				[
+					"firstName" => "Tammy",
+					"lastName" => "McLean",
+					"birthDate" => "1900-01-01"
 				]
 			];
 			
@@ -115,6 +135,22 @@
 				[
 					"parentID" => "JessicaDavid1983-11-03",
 					"childID" => "KatherineDyer2015-12-04"
+				],
+				[
+					"parentID" => "RayDyer1951-03-31",
+					"childID" => "MatthewDyer1979-12-20"
+				],
+				[
+					"parentID" => "MargoYoung1948-06-21",
+					"childID" => "MatthewDyer1979-12-20"
+				],
+				[
+					"parentID" => "RickyDavid1900-01-01",
+					"childID" => "JessicaDavid1983-11-03"
+				],
+				[
+					"parentID" => "TammyMcLean1900-01-01",
+					"childID" => "JessicaDavid1983-11-03"
 				]
 			];
 			
@@ -128,6 +164,18 @@
 					"spouseID1" => "MatthewDyer1979-12-20",
 					"spouseID2" => "JessicaDavid1983-11-03",
 					"startDate" => "2008-07-19",
+					"lastName" => "Dyer"
+				],
+				[
+					"spouseID1" => "RickyDavid1900-01-01",
+					"spouseID2" => "TammyMcLean1900-01-01",
+					"startDate" => "1900-01-01",
+					"lastName" => "David"
+				],
+				[
+					"spouseID1" => "RayDyer1951-03-31",
+					"spouseID2" => "MargoYoung1948-06-21",
+					"startDate" => "1900-01-01",
 					"lastName" => "Dyer"
 				]
 			];

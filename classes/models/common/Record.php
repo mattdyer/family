@@ -32,7 +32,7 @@
 			
 			$columns = $this->DoQuery("SELECT Column_Name,Column_Type,Column_Key
 						   			  FROM Columns
-						   			  WHERE Table_Schema = '$this->Database' AND Table_Name = '$this->TableName';", []);
+						   			  WHERE Table_Schema = ? AND Table_Name = ?;", [$this->Database, $this->TableName], 'ss');
 			
 			$this->QueryDatabase = $this->Database;
 			
@@ -91,7 +91,7 @@
 			$ID = intval($ID);
 			$record = $this->DoQuery("SELECT $this->KeyList
 						   FROM $this->TableName
-						   WHERE $this->IDColumn = $ID", []);
+						   WHERE $this->IDColumn = ?", [$ID], 'i');
 			
 			
 			if($record->num_rows == 0){
@@ -159,7 +159,7 @@
 			}
 			
 			
-			$records = $this->DoQuery($findSQL, []);
+			$records = $this->DoQuery($findSQL, [], '');
 			
 			$results = [];
 			
@@ -201,7 +201,7 @@
 				$result = $this->DoQuery("INSERT INTO $this->TableName
 								($keylist)
 								VALUES
-								($valuelist);", []);
+								($valuelist);", [], '');
 				$this->fields[$this->IDColumn] = $this->mysqli->insert_id;
 			}else{
 				$keyvalues = '';
@@ -224,14 +224,12 @@
 						}
 					}
 				}
-				//die($keyvalues);
+				
 				$IDValue = $this->fields[$this->IDColumn];
-				//die("UPDATE $this->TableName SET $keyvalues WHERE $this->IDColumn = $IDValue");
+				
 				$QueryString = "UPDATE $this->TableName SET $keyvalues WHERE $this->IDColumn = $IDValue;";
-				//$LogDate = date("Y-m-d H:i:s", time());
-				//$this->DoQuery("INSERT INTO QueryLogs (QueryString, DateEntered) VALUES ('$QueryString','$LogDate')");
-				//die($QueryString);
-				$this->DoQuery($QueryString, []);
+				
+				$this->DoQuery($QueryString, [], '');
 			}
 			$this->afterSave();
 		}
@@ -239,7 +237,7 @@
 		function delete(){
 			$IDValue = $this->fields[$this->IDColumn];
 			$result = $this->DoQuery("DELETE FROM $this->TableName
-									 WHERE $this->IDColumn = $IDValue;", []);
+									 WHERE $this->IDColumn = ?;", [$IDValue], 'i');
 			return $result;
 		}
 		
@@ -297,22 +295,35 @@
 			return $DisplayDate;
 		}
 		
-		protected function DoQuery($SQL, $params){
+		protected function DoQuery($SQL, $params, $types){
 			
 			$this->mysqli = new mysqli($this->Server, $this->Username, $this->Password);
 			$this->mysqli->select_db($this->QueryDatabase);
 			
-			$result = $this->mysqli->query($SQL); 
+			$stmt = $this->mysqli->prepare($SQL);
 			
 			$this->LastSQL = $SQL;
+			
+			if(sizeof($params)){
+				$stmt->bind_param($types, ...$params);
+			}
+			$stmt->execute();
+			$result = $stmt->get_result();
 			
 			if(!$result){
 				var_dump($this->mysqli->error);
 				var_dump($result);
 			}
 			
+			/*$result = $this->mysqli->query($SQL); 
 			
-			//var_dump($this->LastSQL);
+			$this->LastSQL = $SQL;
+			
+			if(!$result){
+				var_dump($this->mysqli->error);
+				var_dump($result);
+			}*/
+			
 			
 			return $result;
 			
@@ -322,7 +333,7 @@
 			
 			$dropSQL = "DROP TABLE IF EXISTS $tableName;";
 			
-			$this->DoQuery($dropSQL, []);
+			$this->DoQuery($dropSQL, [], '');
 			
 			$createSQL = "CREATE TABLE IF NOT EXISTS $tableName(";
 			
@@ -362,7 +373,7 @@
 			
 			//var_dump($createSQL);
 			
-			$this->DoQuery($createSQL, []);
+			$this->DoQuery($createSQL, [], '');
 			
 		}
 		
