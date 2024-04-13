@@ -2,6 +2,12 @@
 	padding: 7px 0;
 }
 
-.tree-person{
+.person-container{
+	display: inline-block;
+	padding: 10px;
+}
+
+.marriage-container{
+	display: inline-block;
 	padding: 10px;
 }

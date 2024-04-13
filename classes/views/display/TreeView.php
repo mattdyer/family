@@ -13,31 +13,36 @@
 		
 		function getTreeContent($tree){
 			
+			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
+			$marriageView = LoadClass(SiteRoot . '/classes/views/people/MarriageView');
+			
 			ob_start();
 				//var_dump($tree);
 				
 				foreach($tree as $row){
 					
 					print_r('<div class="tree-row">');
-					
-					foreach($row as $person){
-						print_r('<span class="tree-person">');
-						print_r($person['fields']['firstName']);
-						print_r(' ');
-						print_r($person['displayLastName']);
-						
-						foreach($person['marriages'] as $marriage){
-							print_r($marriage['fields']['startDate']);
-							if($marriage['fields']['endDate'] == ''){
-								print_r(' - Present');
-							}else{
-								print_r($marriage['fields']['endDate']);
-							}
+					if($row['type'] == 'people'){
+						foreach($row['people'] as $person){
+							
+							print_r($personView->personDisplay($person));
+							
 						}
 						
-						print_r('</span>');
+						foreach($row['marriages'] as $marriage){
+							
+							print_r($marriageView->marriageDisplay($marriage));
+							
+						}
 					}
-					
+					/*if($row['type'] == 'marriages'){
+						var_dump($row['personIDs']);
+						foreach($row['people'] as $marriage){
+							
+							print_r($marriageView->marriageDisplay($marriage));
+							
+						}
+					}*/
 					print_r('</div>');
 					
 				}

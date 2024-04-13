@@ -42,7 +42,11 @@
 			
 			$tree = [];
 			
-			array_push($tree, []);
+			array_push($tree, [
+				'type' => 'people',
+				'people' => [],
+				'marriages' => []
+			]);
 			
 			$tree[0] = $this->addPersonToTreeLevel($tree[0], $person);
 			
@@ -60,13 +64,17 @@
 		function addParents($tree, $personID, $depth){
 			
 			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
+			$marriageController = LoadClass(SiteRoot . '/classes/controllers/people/MarriageController');
 			
 			$parents = $personController->getParents($personID);
 			
-			
 			if(sizeof($parents)){
 				
-				array_push($tree, []);
+				array_push($tree, [
+					'type' => 'people',
+					'people' => [],
+					'marriages' => []
+				]);
 				
 				foreach($parents as $parent){
 					$tree[$depth] = $this->addPersonToTreeLevel($tree[$depth], $parent);
@@ -76,7 +84,14 @@
 					
 					$tree = $this->addParents($tree, $parent['id'], $depth + 1);
 				}
+				
 			}
+			
+			$personIDs = array_map(fn($row): int => $row['fields']['id'], $tree[$depth - 1]['people']);
+				
+			$marriages = $marriageController->getMarriages($personIDs);
+			
+			$tree[$depth - 1]['marriages'] = $marriages;
 			
 			
 			return $tree;
@@ -90,11 +105,10 @@
 			//$marriages = $personController->getMarriages($person['id']);
 			$currentLastName = $personController->getCurrentLastName($person['id'], $person['lastName'], time());
 			
-			array_push($treeLevel, [
+			array_push($treeLevel['people'], [
 				'fields' => $person,
 				'currentLastName' => $currentLastName,
-				'displayLastName' => $personController->getDisplayLastName($currentLastName, $person['lastName']),
-				'marriages' => $personController->getMarriages($person['id'])
+				'displayLastName' => $personController->getDisplayLastName($currentLastName, $person['lastName'])
 			]);
 			
 			return $treeLevel;
