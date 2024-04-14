@@ -12,6 +12,12 @@
 				print_r(' ');
 				print_r($marriage['fields']['startDate']);
 				
+				foreach($marriage['children'] as $child){
+					print_r('<div class="child-container">');
+					print_r($child['firstName']);
+					print_r('</div>');
+				}
+				
 				print_r('</div>');
 				
 				$content = ob_get_contents();

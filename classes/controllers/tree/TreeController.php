@@ -1,41 +1,10 @@
 <?php
-	//require_once(SiteRoot . '/classes/common/Record.php');
-	class Tree{
+	class TreeController{
 		function __construct(){
 			
 		}
 		
-		
-		function prepareResponse($url, $form){
-			
-			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
-			
-			$view = LoadClass(SiteRoot . '/classes/views/display/TreeView');
-			
-			if(isset($url['personID'])){
-				
-				$treeController = LoadClass(SiteRoot . '/classes/controllers/tree/TreeController');
-				
-				$tree = $treeController->getTreeUp($url['personID'], 0, 3);
-				
-				$tree = array_reverse($tree);
-				
-				$content = $view->getTreeContent($tree);
-				
-				$response->setContent($content);
-				
-				
-			}else{
-				$content = $view->getDefaultPageContent();
-				
-				$response->setContent($content);
-			}
-			
-			return $response;
-		}
-		
-		
-		/*function getTreeUp($personID, $depth, $maxDepth){
+		function getTreeUp($personID, $depth, $maxDepth){
 			
 			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
 			$personObj->load($personID);
@@ -52,8 +21,33 @@
 			
 			$tree[0] = $this->addPersonToTreeLevel($tree[0], $person);
 			
+			/*array_push($tree[0],[
+				'fields' => $person
+			]);*/
+			
 			$tree = $this->addParents($tree, $personID, $depth + 1, $maxDepth);
 			
+			
+			return $tree;
+		}
+		
+		
+		function getTreeDown($personID, $depth, $maxDepth){
+			
+			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$personObj->load($personID);
+			
+			$tree = [];
+			
+			array_push($tree, [
+				'type' => 'people',
+				'people' => [],
+				'marriages' => []
+			]);
+			
+			$tree[0] = $this->addPersonToTreeLevel($tree[0], $personObj->getFields());
+			
+			$this->addMarriagesToTreeLevel($tree[0]);
 			
 			return $tree;
 		}
@@ -77,6 +71,9 @@
 					
 					foreach($parents as $parent){
 						$tree[$depth] = $this->addPersonToTreeLevel($tree[$depth], $parent);
+						/*array_push($tree[$depth], [
+							'fields' => $parent
+						]);*/
 						
 						$tree = $this->addParents($tree, $parent['id'], $depth + 1, $maxDepth);
 					}
@@ -124,9 +121,7 @@
 			$treeLevel['marriages'] = $marriages;
 			
 			return $treeLevel;
-		}*/
-		
-		
+		}
 		
 	}
 ?>
