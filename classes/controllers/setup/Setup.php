@@ -36,12 +36,7 @@
 	
 			$marriage->setupTable($this->getMarriageRecords());
 			
-			
-			
-			
 		}
-		
-		
 		
 		
 		function getPersonRecords(){

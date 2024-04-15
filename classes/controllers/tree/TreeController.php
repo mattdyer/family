@@ -39,15 +39,35 @@
 			
 			$tree = [];
 			
+			$tree = $this->addNextTreeDownRow($tree, $personObj->getFields(), $depth, $maxDepth);
+			
+			/*$tree[0] = $this->addPersonToTreeLevel($tree[0], $personObj->getFields());
+			
+			$tree[0] = $this->addMarriagesToTreeLevel($tree[0]);*/
+			
+			return $tree;
+		}
+		
+		
+		function addNextTreeDownRow($tree, $person, $depth, $maxDepth){
+			
 			array_push($tree, [
 				'type' => 'people',
 				'people' => [],
 				'marriages' => []
 			]);
 			
-			$tree[0] = $this->addPersonToTreeLevel($tree[0], $personObj->getFields());
+			$tree[$depth] = $this->addPersonToTreeLevel($tree[$depth], $person);
 			
-			$this->addMarriagesToTreeLevel($tree[0]);
+			$tree[$depth] = $this->addMarriagesToTreeLevel($tree[$depth]);
+			
+			if($depth < $maxDepth){
+				foreach($tree[$depth]['marriages'] as $marriage){
+					foreach($marriage['children'] as $child){
+						$tree = $this->addNextTreeDownRow($tree, $child, $depth + 1, $maxDepth);
+					}
+				}
+			}
 			
 			return $tree;
 		}

@@ -18,7 +18,7 @@
 				
 				$tree = $treeController->getTreeDown($url['personID'], 0, 3);
 				
-				$tree = array_reverse($tree);
+				//$tree = array_reverse($tree);
 				
 				$content = $view->getTreeContent($tree);
 				

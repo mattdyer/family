@@ -17,7 +17,7 @@
 			$marriageView = LoadClass(SiteRoot . '/classes/views/people/MarriageView');
 			
 			ob_start();
-				var_dump($tree);
+				//var_dump($tree);
 				
 				foreach($tree as $row){
 					
