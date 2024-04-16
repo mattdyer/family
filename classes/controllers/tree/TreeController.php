@@ -41,10 +41,6 @@
 			
 			$tree = $this->addNextTreeDownRow($tree, $personObj->getFields(), $depth, $maxDepth);
 			
-			/*$tree[0] = $this->addPersonToTreeLevel($tree[0], $personObj->getFields());
-			
-			$tree[0] = $this->addMarriagesToTreeLevel($tree[0]);*/
-			
 			return $tree;
 		}
 		
@@ -59,12 +55,17 @@
 			
 			$tree[$depth] = $this->addPersonToTreeLevel($tree[$depth], $person);
 			
-			$tree[$depth] = $this->addMarriagesToTreeLevel($tree[$depth]);
+			$tree[$depth] = $this->addMarriagesToTreeLevel($tree[$depth], [$person['id']]);
 			
 			if($depth < $maxDepth){
+				
 				foreach($tree[$depth]['marriages'] as $marriage){
-					foreach($marriage['children'] as $child){
-						$tree = $this->addNextTreeDownRow($tree, $child, $depth + 1, $maxDepth);
+					if($marriage['person1']['id'] == $person['id'] OR $marriage['person2']['id'] == $person['id']){
+						foreach($marriage['children'] as $child){
+							//$depth = $depth + 1;
+							$tree = $this->addNextTreeDownRow($tree, $child, $depth + 1, $maxDepth);
+						}
+						
 					}
 				}
 			}
@@ -102,7 +103,9 @@
 				
 			}
 			
-			$tree[$depth - 1] = $this->addMarriagesToTreeLevel($tree[$depth - 1]);
+			$personIDs = array_map(fn($row): int => $row['fields']['id'], $tree[$depth - 1]['people']);
+			
+			$tree[$depth - 1] = $this->addMarriagesToTreeLevel($tree[$depth - 1], $personIDs);
 			
 			
 			return $tree;
@@ -126,19 +129,33 @@
 		}
 		
 		
-		function addMarriagesToTreeLevel($treeLevel){
+		function addMarriagesToTreeLevel($treeLevel, $personIDs){
 			
 			$marriageController = LoadClass(SiteRoot . '/classes/controllers/people/MarriageController');
 			
-			$personIDs = array_map(fn($row): int => $row['fields']['id'], $treeLevel['people']);
-				
 			$marriages = $marriageController->getMarriages($personIDs);
 			
 			foreach($marriages as $key => $marriage){
 				$marriages[$key]['children'] = $marriageController->getChildren($marriage['fields']['id']);
+				
+				array_push($treeLevel['marriages'], $marriages[$key]);
+				
 			}
 			
-			$treeLevel['marriages'] = $marriages;
+			//$treeLevel['marriages'] = $marriages;
+			
+			// print_r('<pre>');
+			// 	print('<div>ABOVE</div>');
+			// 	var_dump($marriages);
+			// 	var_dump($treeLevel['marriages']);
+			// print_r('</pre>');
+			
+			//$treeLevel['marriages'] = array_merge($treeLevel['marriages'], $marriages);
+			
+			// print_r('<pre>');
+			// 	print('<div>BELOW</div>');
+			// 	var_dump($treeLevel['marriages']);
+			// print_r('</pre>');
 			
 			return $treeLevel;
 		}

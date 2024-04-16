@@ -6,7 +6,11 @@
 		
 		
 		function marriageDisplay($marriage){
+			
+			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
+			
 			ob_start();
+				//print_r($personView->personDisplay($marriage['person1']));
 				print_r('<div class="marriage-container">');
 				print_r($marriage['person1']['firstName']);
 				print_r(' and ');

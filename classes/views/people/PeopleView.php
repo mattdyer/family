@@ -24,17 +24,11 @@
 				print_r($person['fields']['firstName']);
 				print_r(' ');
 				print_r($person['displayLastName']);
+				print_r(' ');
+				print_r("<a href=\"?section=display&page=Tree&personID={$person['fields']['id']}\">up</a>");
+				print_r(' ');
+				print_r("<a href=\"?section=display&page=TreeDown&personID={$person['fields']['id']}\">down</a>");
 				
-				/*foreach($person['marriages'] as $marriage){
-					print_r("<div class=\"marriage-{$marriage['fields']['id']}\" data-marriageid=\"{$marriage['fields']['id']}\">Married: ");
-					print_r($marriage['fields']['startDate']);
-					if($marriage['fields']['endDate'] == ''){
-						print_r(' - Present');
-					}else{
-						print_r($marriage['fields']['endDate']);
-					}
-					print_r('</div>');
-				}*/
 				
 				print_r('</div>');
 				
