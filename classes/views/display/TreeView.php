@@ -25,17 +25,21 @@
 					
 					print_r('<div class="tree-row">');
 					if($row['type'] == 'people'){
-						foreach($row['people'] as $person){
+						print_r('<div class="people-row">');
+							foreach($row['people'] as $person){
+								
+								print_r($personView->personDisplay($person));
+								
+							}
+						print_r('</div>');
+						print_r('<div class="marriage-row">');
 							
-							print_r($personView->personDisplay($person));
-							
-						}
-						
-						foreach($row['marriages'] as $marriage){
-							
-							print_r($marriageView->marriageDisplay($marriage));
-							
-						}
+							foreach($row['marriages'] as $marriage){
+								
+								print_r($marriageView->marriageDisplay($marriage));
+								
+							}
+						print_r('</div>');
 					}
 					/*if($row['type'] == 'marriages'){
 						var_dump($row['personIDs']);

@@ -14,9 +14,15 @@
 			
 			if(isset($url['personID'])){
 				
+				if(isset($url['depth'])){
+					$depth = $url['depth'];
+				}else{
+					$depth = 3;
+				}
+				
 				$treeController = LoadClass(SiteRoot . '/classes/controllers/tree/TreeController');
 				
-				$tree = $treeController->getTreeDown($url['personID'], 0, 3);
+				$tree = $treeController->getTreeDown($url['personID'], 0, $depth);
 				
 				$content = $view->getTreeContent($tree);
 				

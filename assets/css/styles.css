@@ -7,7 +7,12 @@
 	padding: 10px;
 }
 
+.marriage-row{
+	display: flex;
+}
+
 .marriage-container{
-	display: block;
+	margin:0 7px;
 	padding: 10px;
+	background-color: #eee;
 }

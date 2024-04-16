@@ -110,6 +110,16 @@
 					"firstName" => "Calloway",
 					"lastName" => "Doely",
 					"birthDate" => "2000-01-01"
+				],
+				[
+					"firstName" => "John",
+					"lastName" => "Dyer",
+					"birthDate" => "1932-01-01"
+				],
+				[
+					"firstName" => "Pauline",
+					"lastName" => "Smith",
+					"birthDate" => "1930-01-01"
 				]
 			];
 			
@@ -190,6 +200,14 @@
 				[
 					"parentID" => "JoshDoely1986-01-01",
 					"childID" => "CallowayDoely2000-01-01"
+				],
+				[
+					"parentID" => "JohnDyer1932-01-01",
+					"childID" => "RayDyer1951-03-31"
+				],
+				[
+					"parentID" => "PaulineSmith1930-01-01",
+					"childID" => "RayDyer1951-03-31"
 				]
 			];
 			
@@ -222,6 +240,12 @@
 					"spouseID2" => "LeslieDyer1986-07-31",
 					"startDate" => "1900-01-01",
 					"lastName" => "Doely"
+				],
+				[
+					"spouseID1" => "JohnDyer1932-01-01",
+					"spouseID2" => "PaulineSmith1930-01-01",
+					"startDate" => "1900-01-01",
+					"lastName" => "Dyer"
 				]
 			];
 			

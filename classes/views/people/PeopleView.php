@@ -5,19 +5,6 @@
 		}
 		
 		
-		/*
-		
-		
-			People should show up once under their parents, or at the top of the tree if they are the top.
-			
-			Then they should show in each marriage they are part of.  Below the marriage show the children 
-			and these each start a new tree.
-		
-		
-		*/
-		
-		
-		
 		function personDisplay($person){
 			ob_start();
 				print_r('<div class="person-container">');

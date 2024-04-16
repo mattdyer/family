@@ -103,9 +103,9 @@
 				
 			}
 			
-			$personIDs = array_map(fn($row): int => $row['fields']['id'], $tree[$depth - 1]['people']);
+			//$personIDs = array_map(fn($row): int => $row['fields']['id'], $tree[$depth - 1]['people']);
 			
-			$tree[$depth - 1] = $this->addMarriagesToTreeLevel($tree[$depth - 1], $personIDs);
+			//$tree[$depth - 1] = $this->addMarriagesToTreeLevel($tree[$depth - 1], $personIDs);
 			
 			
 			return $tree;
