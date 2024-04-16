@@ -60,7 +60,7 @@
 			if($depth < $maxDepth){
 				
 				foreach($tree[$depth]['marriages'] as $marriage){
-					if($marriage['person1']['id'] == $person['id'] OR $marriage['person2']['id'] == $person['id']){
+					if($marriage['person1']['fields']['id'] == $person['id'] OR $marriage['person2']['fields']['id'] == $person['id']){
 						foreach($marriage['children'] as $child){
 							//$depth = $depth + 1;
 							$tree = $this->addNextTreeDownRow($tree, $child, $depth + 1, $maxDepth);
@@ -116,14 +116,7 @@
 			
 			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
 			
-			//$marriages = $personController->getMarriages($person['id']);
-			$currentLastName = $personController->getCurrentLastName($person['id'], $person['lastName'], time());
-			
-			array_push($treeLevel['people'], [
-				'fields' => $person,
-				'currentLastName' => $currentLastName,
-				'displayLastName' => $personController->getDisplayLastName($currentLastName, $person['lastName'])
-			]);
+			array_push($treeLevel['people'], $personController->getDisplayPerson($person['id']));
 			
 			return $treeLevel;
 		}

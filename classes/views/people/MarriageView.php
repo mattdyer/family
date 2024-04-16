@@ -10,14 +10,16 @@
 			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
 			
 			ob_start();
-				//print_r($personView->personDisplay($marriage['person1']));
 				print_r('<div class="marriage-container">');
-				print_r($marriage['person1']['firstName']);
+				print_r($personView->personDisplay($marriage['person1']));
+				print_r($personView->personDisplay($marriage['person2']));
+				/*
+				print_r($marriage['person1']['fields']['firstName']);
 				print_r(' and ');
-				print_r($marriage['person2']['firstName']);
+				print_r($marriage['person2']['fields']['firstName']);
 				print_r(' ');
 				print_r($marriage['fields']['lastName']);
-				print_r(' ');
+				print_r(' ');*/
 				//print_r($marriage['fields']['startDate']);
 				
 				print_r('<div>');

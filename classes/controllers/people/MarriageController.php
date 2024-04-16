@@ -42,8 +42,35 @@
 		
 		function getMarriages($personIDs){
 			
+			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
 			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			
+			$marriageRecords = $this->getMarriageRecordsForPersonIDs($personIDs);
+			
+			$marriages = [];
+			
+			foreach($marriageRecords as $marriageRecord){
+				$person1 = $personController->getDisplayPerson($marriageRecord['spouseID1']);
+				
+				$person2 = $personController->getDisplayPerson($marriageRecord['spouseID2']);
+				
+				array_push($marriages, [
+					'fields' => $marriageRecord,
+					'person1' => $person1,
+					'person2' => $person2
+				]);
+				
+			}
+			
+			
+			return $marriages;
+		}
+		
+		
+		function getMarriageRecordsForPersonIDs($personIDs){
+			
+			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			
 			
 			$marriageRecords = $marriage->findBy([
 				'inListValues' => [
@@ -67,28 +94,7 @@
 				]
 			]);
 			
-			$marriages = [];
-			
-			foreach($marriageRecords as $marriageRecord){
-				$personObj->reset();
-				$personObj->load($marriageRecord['spouseID1']);
-				
-				$person1 = $personObj->getFields();
-				
-				$personObj->load($marriageRecord['spouseID2']);
-				
-				$person2 = $personObj->getFields();
-				
-				array_push($marriages, [
-					'fields' => $marriageRecord,
-					'person1' => $person1,
-					'person2' => $person2
-				]);
-				
-			}
-			
-			
-			return $marriages;
+			return $marriageRecords;
 		}
 		
 		

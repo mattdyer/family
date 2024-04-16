@@ -88,10 +88,30 @@
 		}
 		
 		
-		function getMarriages($personID){
+		function getDisplayPerson($personID){
+			
+			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			
+			$personObj->load($personID);
+			
+			$person = $personObj->getFields();
+			
+			$currentLastName = $this->getCurrentLastName($person['id'], $person['lastName'], time());
+			
+			$displayPerson = [
+				'fields' => $person,
+				'currentLastName' => $currentLastName,
+				'displayLastName' => $this->getDisplayLastName($currentLastName, $person['lastName'])
+			];
+			
+			return $displayPerson;
+		}
+		
+		
+		function getCurrentLastName($personID, $lastName, $currentTime){
 			
 			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			
 			
 			$marriageRecords = $marriage->findBy([
 				'equalsValues' => [
@@ -99,59 +119,18 @@
 				]
 			]);
 			
-			$marriageIDs = array_map(fn($row): int => $row['id'], $marriageRecords);
-			
-			$marriageRecords = $marriage->findBy([
-				'equalsValues' => [
-					'spouseID2' => $personID
-				]
-			]);
-			
-			$marriageIDs = array_merge($marriageIDs, array_map(fn($row): int => $row['id'], $marriageRecords));
-			
-			$marriageRecords = $marriage->findBy([
-				'inListValues' => [
-					'id' => $marriageIDs
-				]
-			]);
-			
-			$marriages = [];
-			
-			foreach($marriageRecords as $marriageRecord){
-				$personObj->reset();
-				$personObj->load($marriageRecord['spouseID1']);
-				
-				$person1 = $personObj->getFields();
-				
-				$personObj->load($marriageRecord['spouseID2']);
-				
-				$person2 = $personObj->getFields();
-				
-				array_push($marriages, [
-					'fields' => $marriageRecord,
-					'person1' => $person1,
-					'person2' => $person2
-				]);
-				
-			}
-			
-			
-			return $marriages;
-		}
-		
-		
-		function getCurrentLastName($personID, $lastName, $currentTime){
+			$marriageController = LoadClass(SiteRoot . '/classes/controllers/people/MarriageController');
 			
 			$currentLastName = $lastName;
 			
-			$marriages = $this->getMarriages($personID);
+			$marriages = $marriageController->getMarriageRecordsForPersonIDs([$personID]);
 			
 			foreach($marriages as $marriage){
 				
-				if($marriage['fields']['startDate'] < $currentTime AND $marriage['fields']['endDate'] == ''){
-					$currentLastName = $marriage['fields']['lastName'];
-				}else if($marriage['fields']['startDate'] < $currentTime AND $marriage['fields']['endDate'] > $currentTime){
-					$currentLastName = $marriage['fields']['lastName'];
+				if($marriage['startDate'] < $currentTime AND $marriage['endDate'] == ''){
+					$currentLastName = $marriage['lastName'];
+				}else if($marriage['startDate'] < $currentTime AND $marriage['endDate'] > $currentTime){
+					$currentLastName = $marriage['lastName'];
 				}
 				
 			}

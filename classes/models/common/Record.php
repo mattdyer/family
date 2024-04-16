@@ -324,6 +324,8 @@
 				var_dump($result);
 			}*/
 			
+			$this->mysqli->close();
+			
 			
 			return $result;
 			
