@@ -40,7 +40,19 @@
 		
 		
 		function getPersonRecords(){
-			$records = [
+			
+			$personJSON = file_get_contents(SiteRoot . '/data/people.json', true);
+			
+			$records = json_decode($personJSON, true);
+			
+			return $records;
+			
+			//echo('<pre>');
+			
+			//var_dump($recordsFromJSON);
+			
+			
+			/*$records = [
 				[
 					"firstName" => "Matthew",
 					"lastName" => "Dyer",
@@ -139,12 +151,27 @@
 				]
 			];
 			
-			return $records;
+			
+			
+			var_dump($records);
+			
+			echo('</pre>');
+			
+			die('people');
+			
+			return $records;*/
 		}
 		
 		
 		function getParentChildRecords(){
-			$records = [
+			
+			$parentChildJSON = file_get_contents(SiteRoot . '/data/parentchild.json', true);
+			
+			$records = json_decode($parentChildJSON, true);
+			
+			return $records;
+			
+			/*$records = [
 				[
 					"parentID" => "MatthewDyer1979-12-20",
 					"childID" => "JacobDyer2010-03-05"
@@ -227,12 +254,19 @@
 				]
 			];
 			
-			return $records;
+			return $records;*/
 		}
 		
 		
 		function getMarriageRecords(){
-			$records = [
+			
+			$marriageJSON = file_get_contents(SiteRoot . '/data/marriages.json', true);
+			
+			$records = json_decode($marriageJSON, true);
+			
+			return $records;
+			
+			/*$records = [
 				[
 					"spouseID1" => "MatthewDyer1979-12-20",
 					"spouseID2" => "JessicaDavid1983-11-03",
@@ -265,7 +299,7 @@
 				]
 			];
 			
-			return $records;
+			return $records;*/
 		}
 		
 		

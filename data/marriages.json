@@ -1,0 +1,32 @@
+[
+	{
+		"spouseID1" : "MatthewDyer1979-12-20",
+		"spouseID2" : "JessicaDavid1983-11-03",
+		"startDate" : "2008-07-19",
+		"lastName" : "Dyer"
+	},
+	{
+		"spouseID1" : "RickyDavid1900-01-01",
+		"spouseID2" : "TammyMcLean1900-01-01",
+		"startDate" : "1900-01-01",
+		"lastName" : "David"
+	},
+	{
+		"spouseID1" : "RayDyer1951-03-31",
+		"spouseID2" : "MargoYoung1948-06-21",
+		"startDate" : "1900-01-01",
+		"lastName" : "Dyer"
+	},
+	{
+		"spouseID1" : "JoshDoely1986-01-01",
+		"spouseID2" : "LeslieDyer1986-07-31",
+		"startDate" : "1900-01-01",
+		"lastName" : "Doely"
+	},
+	{
+		"spouseID1" : "JohnDyer1932-01-01",
+		"spouseID2" : "PaulineSmith1930-01-01",
+		"startDate" : "1900-01-01",
+		"lastName" : "Dyer"
+	}
+]
