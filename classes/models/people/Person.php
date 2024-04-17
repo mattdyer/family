@@ -42,6 +42,20 @@
 					"extra" => ""
 				],
 				[
+					"name" => "nickName",
+					"type" => "varchar(100)",
+					"primaryKey" => false,
+					"allowNull" => true,
+					"extra" => ""
+				],
+				[
+					"name" => "middleName",
+					"type" => "varchar(100)",
+					"primaryKey" => false,
+					"allowNull" => true,
+					"extra" => ""
+				],
+				[
 					"name" => "lastName",
 					"type" => "varchar(100)",
 					"primaryKey" => false,

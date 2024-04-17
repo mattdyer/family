@@ -31,6 +31,7 @@
 	},
 	{
 		"firstName" : "Katherine",
+		"nickName": "Katie",
 		"lastName" : "Dyer",
 		"birthDate" : "2015-12-04",
 		"live" : 1
@@ -42,9 +43,10 @@
 		"live" : 1
 	},
 	{
-		"firstName" : "Margo",
+		"firstName" : "Margaret",
+		"nickName": "Margo",
 		"lastName" : "Young",
-		"birthDate" : "1948-06-21",
+		"birthDate" : "1948-06-24",
 		"live" : 1
 	},
 	{
@@ -86,37 +88,41 @@
 	{
 		"firstName" : "John",
 		"lastName" : "Dyer",
-		"birthDate" : "1932-01-01",
+		"birthDate" : "1932-05-22",
 		"live" : 1
 	},
 	{
 		"firstName" : "Pauline",
 		"lastName" : "Smith",
-		"birthDate" : "1930-01-01",
+		"birthDate" : "1933-01-09",
 		"live" : 1
 	},
 	{
-		"firstName" : "Jeff",
+		"firstName" : "Jeffery",
+		"nickName": "Jeff",
 		"lastName" : "Dyer",
-		"birthDate" : "1953-01-01",
+		"birthDate" : "1954-01-05",
+		"live" : 1
+	},
+	{
+		"firstName" : "Ronald",
+		"nickName": "Ronnie",
+		"lastName" : "Dyer",
+		"birthDate" : "1955-02-20",
 		"live" : 1
 	},
 	{
 		"firstName" : "Mark",
+		"middleName": "Edward",
 		"lastName" : "Dyer",
 		"birthDate" : "1957-01-01",
 		"live" : 1
 	},
 	{
-		"firstName" : "Ronny",
+		"firstName" : "Lonnie",
+		"middleName": "Joe",
 		"lastName" : "Dyer",
-		"birthDate" : "1955-01-01",
-		"live" : 1
-	},
-	{
-		"firstName" : "Lonny",
-		"lastName" : "Dyer",
-		"birthDate" : "1961-01-01",
+		"birthDate" : "1963-02-24",
 		"live" : 1
 	}
 ]

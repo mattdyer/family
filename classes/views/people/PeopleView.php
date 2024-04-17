@@ -10,6 +10,12 @@
 				print_r('<div class="person-container">');
 				print_r($person['fields']['firstName']);
 				print_r(' ');
+				if(strlen($person['fields']['nickName'])){
+					print_r('"' .$person['fields']['nickName'] . '"');
+					print_r(' ');
+				}
+				print_r($person['fields']['middleName']);
+				print_r(' ');
 				print_r($person['displayLastName']);
 				print_r(' ');
 				print_r("<a class=\"tree-link\" href=\"?section=display&page=Tree&personID={$person['fields']['id']}\">up</a>");

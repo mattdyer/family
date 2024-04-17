@@ -111,7 +111,7 @@
 			$records = $this->findBy($values);
 			
 			if(sizeof($records) != 1){
-				throw new Exception(sizeof($records) . " records found in ' . $this->TableName .  ' for provided values. Expected 1.");
+				throw new Exception(sizeof($records) . " records found in ' . $this->TableName .  ' for provided values. Expected 1." . json_encode($values));
 			}
 			
 			$row = $records[0];
