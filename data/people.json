@@ -94,5 +94,29 @@
 		"lastName" : "Smith",
 		"birthDate" : "1930-01-01",
 		"live" : 1
+	},
+	{
+		"firstName" : "Jeff",
+		"lastName" : "Dyer",
+		"birthDate" : "1953-01-01",
+		"live" : 1
+	},
+	{
+		"firstName" : "Mark",
+		"lastName" : "Dyer",
+		"birthDate" : "1957-01-01",
+		"live" : 1
+	},
+	{
+		"firstName" : "Ronny",
+		"lastName" : "Dyer",
+		"birthDate" : "1955-01-01",
+		"live" : 1
+	},
+	{
+		"firstName" : "Lonny",
+		"lastName" : "Dyer",
+		"birthDate" : "1961-01-01",
+		"live" : 1
 	}
 ]
