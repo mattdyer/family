@@ -18,7 +18,12 @@
 					<link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
 					<script type="text/javascript" src="/assets/js/scripts.js"></script>
 				</head>
-				<body>');
+				<body>
+					<div class="nav-container">
+						<div class="nav-item"><a href="?section=display&page=ListController">List</a></div>
+					</div>
+				
+				');
 				
 				print_r($content);
 				

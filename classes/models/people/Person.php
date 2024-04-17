@@ -82,6 +82,13 @@
 					"primaryKey" => false,
 					"allowNull" => false,
 					"extra" => ""
+				],
+				[
+					"name" => "live",
+					"type" => "bit",
+					"primaryKey" => false,
+					"allowNull" => true,
+					"extra" => ""
 				]
 			];
 			

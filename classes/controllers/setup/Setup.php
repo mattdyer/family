@@ -44,82 +44,98 @@
 				[
 					"firstName" => "Matthew",
 					"lastName" => "Dyer",
-					"birthDate" => "1979-12-20"
+					"birthDate" => "1979-12-20",
+					"live" => 1
 				],
 				[
 					"firstName" => "Jessica",
 					"lastName" => "David",
-					"birthDate" => "1983-11-03"
+					"birthDate" => "1983-11-03",
+					"live" => 1
 				],
 				[
 					"firstName" => "Jacob",
 					"lastName" => "Dyer",
-					"birthDate" => "2010-03-05"
+					"birthDate" => "2010-03-05",
+					"live" => 1
 				],
 				[
 					"firstName" => "William",
 					"lastName" => "Dyer",
-					"birthDate" => "2012-02-21"
+					"birthDate" => "2012-02-21",
+					"live" => 1
 				],
 				[
 					"firstName" => "Terry",
 					"lastName" => "Dyer",
-					"birthDate" => "2013-07-07"
+					"birthDate" => "2013-07-07",
+					"live" => 1
 				],
 				[
 					"firstName" => "Katherine",
 					"lastName" => "Dyer",
-					"birthDate" => "2015-12-04"
+					"birthDate" => "2015-12-04",
+					"live" => 1
 				],
 				[
 					"firstName" => "Ray",
 					"lastName" => "Dyer",
-					"birthDate" => "1951-03-31"
+					"birthDate" => "1951-03-31",
+					"live" => 1
 				],
 				[
 					"firstName" => "Margo",
 					"lastName" => "Young",
-					"birthDate" => "1948-06-21"
+					"birthDate" => "1948-06-21",
+					"live" => 1
 				],
 				[
 					"firstName" => "Ricky",
 					"lastName" => "David",
-					"birthDate" => "1900-01-01"
+					"birthDate" => "1900-01-01",
+					"live" => 1
 				],
 				[
 					"firstName" => "Tammy",
 					"lastName" => "McLean",
-					"birthDate" => "1900-01-01"
+					"birthDate" => "1900-01-01",
+					"live" => 1
 				],
 				[
 					"firstName" => "Leslie",
 					"lastName" => "Dyer",
-					"birthDate" => "1986-07-31"
+					"birthDate" => "1986-07-31",
+					"live" => 1
 				],
 				[
 					"firstName" => "Josh",
 					"lastName" => "Doely",
-					"birthDate" => "1986-01-01"
+					"birthDate" => "1986-01-01",
+					"live" => 1
 				],
 				[
 					"firstName" => "Cooper",
 					"lastName" => "Doely",
-					"birthDate" => "2000-01-01"
+					"birthDate" => "2000-01-01",
+					"live" => 1
 				],
 				[
 					"firstName" => "Calloway",
 					"lastName" => "Doely",
-					"birthDate" => "2000-01-01"
+					"birthDate" => "2000-01-01",
+					"live" => 1
 				],
 				[
 					"firstName" => "John",
 					"lastName" => "Dyer",
-					"birthDate" => "1932-01-01"
+					"birthDate" => "1932-01-01",
+					"live" => 1
 				],
 				[
 					"firstName" => "Pauline",
 					"lastName" => "Smith",
-					"birthDate" => "1930-01-01"
+					"birthDate" => "1930-01-01",
+					"live" => 1
 				]
 			];
 			

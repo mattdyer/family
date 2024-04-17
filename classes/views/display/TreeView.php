@@ -6,6 +6,18 @@
 		}
 		
 		
+		/*
+		
+		Other view options
+			searchable list of all people with links to view trees
+			
+			timeline of people and marriages
+				dates down left side of page
+				people and marriages float in a box at the correct year
+		
+		*/
+		
+		
 		function getDefaultPageContent(){
 			return 'Tree';
 		}

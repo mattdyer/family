@@ -12,9 +12,9 @@
 				print_r(' ');
 				print_r($person['displayLastName']);
 				print_r(' ');
-				print_r("<a href=\"?section=display&page=Tree&personID={$person['fields']['id']}\">up</a>");
+				print_r("<a class=\"tree-link\" href=\"?section=display&page=Tree&personID={$person['fields']['id']}\">up</a>");
 				print_r(' ');
-				print_r("<a href=\"?section=display&page=TreeDown&personID={$person['fields']['id']}\">down</a>");
+				print_r("<a class=\"tree-link\" href=\"?section=display&page=TreeDown&personID={$person['fields']['id']}\">down</a>");
 				
 				
 				print_r('</div>');
