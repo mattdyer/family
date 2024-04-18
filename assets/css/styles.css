@@ -26,3 +26,29 @@ body{
 	font-size: 10px;
 	color: #aaaaaa;
 }
+
+.timeline-wrapper{
+	display:flex;
+	flex-wrap: nowrap;
+}
+
+.timeline-years{
+	margin: 0 10px;
+	position: relative;
+	width: 100px;
+}
+
+.timeline-year{
+	position: absolute;
+	width: 150px;
+}
+
+.timeline-items{
+	display: inline-block;
+	position: relative;
+}
+
+.timeline-item{
+	position: absolute;
+	width: 300px;
+}
