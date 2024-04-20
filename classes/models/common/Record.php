@@ -158,6 +158,20 @@
 				$findSQL = $findSQL . " 1 = 1";
 			}
 			
+			if(isset($values['sort']) AND sizeof($values['sort']) > 0){
+				
+				$findSQL = $findSQL . " ORDER BY";
+				
+				foreach($values['sort'] as $index => $item){
+					$findSQL = $findSQL . " {$item['column']} {$item['direction']}";
+					if($index < sizeof($values['sort']) - 1){
+						$findSQL = $findSQL . ",";
+					}
+				}
+			}
+			
+			//var_dump($findSQL);
+			//die('dfs');
 			
 			$records = $this->DoQuery($findSQL, [], '');
 			

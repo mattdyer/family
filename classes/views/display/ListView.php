@@ -15,6 +15,16 @@
 			$people = $personObj->findBy([
 				'equalsValues' => [
 					'live' => 1
+				],
+				'sort' => [
+					[
+						'column' => 'lastName',
+						'direction' => 'asc'
+					],
+					[
+						'column' => 'firstName',
+						'direction' => 'asc'
+					]
 				]
 			]);
 			
@@ -22,8 +32,9 @@
 			
 			ob_start();
 				foreach($people as $person){
-					echo('<div>');
-					echo($personView->personDisplay($personController->getDisplayPerson($person['id'])));
+					echo('<div class="list-view-item">');
+						echo("<div class=\"person-sort\">{$person['lastName']}, {$person['firstName']}</div>");
+						echo($personView->personDisplay($personController->getDisplayPerson($person['id'])));
 					echo('</div>');
 				}
 				

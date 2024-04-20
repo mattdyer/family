@@ -21,7 +21,7 @@
 				<body>
 					<div class="nav-container">
 						<div class="nav-item"><a href="?section=display&page=ListController">List</a></div>
-						<div class="nav-item"><a href="?section=display&page=TimeLine">Time Line</a></div>
+						<div class="nav-item"><a href="?section=display&page=TimeLine">Timeline</a></div>
 					</div>
 				
 				');

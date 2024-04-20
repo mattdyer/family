@@ -28,8 +28,8 @@
 							
 							$top = $yearValueAdjusted * $yearScaleValue;
 							
-							echo("<div class=\"timeline-item\" style=\"top: {$top}px\">");
-							echo($item['display'] . ' ' . $item['date']);
+							echo("<div class=\"timeline-item\" style=\"top: {$top}px\" tabindex=\"0\">");
+							echo($item['date'] . ' ' . $item['display']);
 							echo('</div>');
 						}
 					echo('</div>');

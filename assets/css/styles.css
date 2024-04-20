@@ -3,13 +3,25 @@ body{
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+.nav-container{
+	display: flex;
+}
+
+.nav-item{
+	margin: 0.5em;
+	padding: 0.5em;
+}
+
 .tree-row{
-	padding: 7px 0;
+	padding: 0.6em 0;
 }
 
 .person-container{
 	display: inline-block;
-	padding: 10px;
+	margin: 0.3em 0.6em;
+	padding: 0.8em;
+	background-color: #ddfdff;
+	border-radius: 8px;
 }
 
 .marriage-row{
@@ -17,13 +29,14 @@ body{
 }
 
 .marriage-container{
-	margin:0 7px;
-	padding: 10px;
+	margin: 0 0.6em;
+	padding: 0.8em;
 	background-color: #eee;
+	border-radius: 8px;
 }
 
 .tree-link{
-	font-size: 10px;
+	font-size: 0.8em;
 	color: #aaaaaa;
 }
 
@@ -33,14 +46,14 @@ body{
 }
 
 .timeline-years{
-	margin: 0 10px;
+	margin: 0 0.8em;
 	position: relative;
-	width: 100px;
+	width: 8.0em;
 }
 
 .timeline-year{
 	position: absolute;
-	width: 150px;
+	width: 12em;
 }
 
 .timeline-items{
@@ -49,6 +62,49 @@ body{
 }
 
 .timeline-item{
+	z-index: 0;
 	position: absolute;
-	width: 300px;
+	width: 28em;
+	transition: left 0.5s;
+	left: 0;
+	transition-delay: 1s;
+	background-color:#eee;
+	padding: 0 4px;
+}
+
+.timeline-item:focus{
+	z-index: 50;
+	left: 10em;
+	transition-delay: 0s;
+	border: 1px dashed #ccc;
+}
+
+.timeline-item:hover{
+	z-index: 100;
+	left: 5em;
+	transition-delay: 0s;
+	border: 1px solid #ccc;
+}
+
+.timeline-item:hover.timeline-item:focus{
+	left: 10em;
+	border: 1px dashed #ccc;
+}
+
+.timeline-item .person-container{
+	background-color: #ccecee;
+}
+
+.timeline-item:hover .person-container, .timeline-item:focus .person-container{
+	background-color: #ddfdff;
+}
+
+.list-view-item{
+	padding: 0.5em 0 0 0;
+	border-top: 1px solid #eee;
+}
+
+.person-sort{
+	font-size: 0.6em;
+	color: #aaa;
 }

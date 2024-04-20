@@ -41,10 +41,13 @@
 			
 			$items = [];
 			
+			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
+			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
+			
 			foreach($people as $person){
 				array_push($items, [
 					'date' => $person['birthDate'],
-					'display' => '<strong>Person:</strong> ' . $person['firstName'] . ' ' . $person['lastName']
+					'display' => $personView->personDisplay($personController->getDisplayPerson($person['id']))
 				]);
 			}
 			
