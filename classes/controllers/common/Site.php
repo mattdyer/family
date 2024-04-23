@@ -1,4 +1,6 @@
 <?php
+	use ReallySimpleJWT\Token;	
+
 	class Site{
 		function __construct(){
 			
@@ -13,6 +15,16 @@
 			return $response;
 		}
 		
-		
+		function getTokenTest(){
+			$userId = 12;
+			$secret = 'sec!ReT423*&';
+			$expiration = time() + 3600;
+			$issuer = 'localhost';
+
+			$token = Token::create($userId, $secret, $expiration, $issuer);
+
+			return $token;
+		}
+
 	}
 ?>
