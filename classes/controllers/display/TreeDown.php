@@ -1,5 +1,8 @@
 <?php
-	//require_once(SiteRoot . '/classes/common/Record.php');
+	
+	use classes\controllers\common\Response;
+	use classes\views\display\TreeView;
+
 	class TreeDown{
 		function __construct(){
 			
@@ -8,9 +11,10 @@
 		
 		function prepareResponse($url, $form){
 			
-			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
+			//$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
+			$response = new Response();
 			
-			$view = LoadClass(SiteRoot . '/classes/views/display/TreeView');
+			$view = new TreeView();
 			
 			if(isset($url['personID'])){
 				

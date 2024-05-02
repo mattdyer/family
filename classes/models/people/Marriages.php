@@ -1,4 +1,7 @@
 <?php
+	
+	//namespace models\people;
+
 	require_once(SiteRoot . '/classes/models/common/Record.php');
 	class Marriages extends Record{
 		function __construct(){

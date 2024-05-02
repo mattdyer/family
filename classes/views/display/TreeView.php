@@ -1,5 +1,10 @@
 <?php
-	//require_once(SiteRoot . '/classes/common/Record.php');
+	
+	namespace classes\views\display;
+
+	use classes\views\people\PeopleView;
+	use classes\views\people\MarriageView;
+	
 	class TreeView{
 		function __construct(){
 			
@@ -25,8 +30,11 @@
 		
 		function getTreeContent($tree){
 			
-			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
-			$marriageView = LoadClass(SiteRoot . '/classes/views/people/MarriageView');
+			//$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
+			//$marriageView = LoadClass(SiteRoot . '/classes/views/people/MarriageView');
+
+			$personView = new PeopleView();
+			$marriageView = new MarriageView();
 			
 			ob_start();
 				// print_r('<pre>');

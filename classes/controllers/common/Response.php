@@ -1,4 +1,7 @@
 <?php
+	
+	namespace classes\controllers\common;
+	
 	class Response{
 		function __construct(){
 			$this->content = '';	

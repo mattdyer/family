@@ -1,4 +1,7 @@
 <?php
+	
+	namespace classes\views\people;
+	
 	class MarriageView{
 		function __construct(){
 			
@@ -7,7 +10,7 @@
 		
 		function marriageDisplay($marriage){
 			
-			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
+			$personView = new PeopleView();
 			
 			ob_start();
 				print_r('<div class="marriage-container">');

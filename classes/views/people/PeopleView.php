@@ -1,4 +1,7 @@
 <?php
+	
+	namespace classes\views\people;
+	
 	class PeopleView{
 		function __construct(){
 			

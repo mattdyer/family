@@ -58,6 +58,7 @@
 		return new $ClassName;
 	}
 
+	require_once(SiteRoot . '/classes/autoload.php');
 	require_once(SiteRoot . '/vendor/autoload.php');
 	
 ?>
