@@ -4,7 +4,7 @@
 		$classPath = str_replace('\\', '/', $class_name);
 		$filePath = SiteRoot . '/' . $classPath . '.php';
 
-		echo($class_name . '<br>');
+		//echo($class_name . '<br>');
 
 
 		if(file_exists($filePath)){

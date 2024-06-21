@@ -1,4 +1,12 @@
 <?php
+	
+	namespace classes\controllers\people;
+
+	use classes\models\people\Person;
+	use classes\models\people\ParentChild;
+	use classes\models\people\Marriages;
+	use classes\controllers\people\MarriageController;
+	
 	class PersonController{
 		function __construct(){
 			
@@ -7,8 +15,8 @@
 		
 		function getParents($personID){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
-			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
+			$personObj = new Person();
+			$parentChild = new ParentChild();
 			
 			$parentRelationships = $parentChild->findBy([
 				"equalsValues" => [
@@ -32,8 +40,8 @@
 		
 		function getChildren($personID){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
-			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
+			$personObj = new Person();
+			$parentChild = new ParentChild();
 			
 			$childRelationships = $parentChild->findBy([
 				"equalsValues" => [
@@ -57,8 +65,8 @@
 		
 		function getSiblings($personID){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
-			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
+			$personObj = new Person();
+			$parentChild = new ParentChild();
 			
 			$parentRelationships = $parentChild->findBy([
 				"equalsValues" => [
@@ -90,7 +98,7 @@
 		
 		function getDisplayPerson($personID){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$personObj = new Person();
 			
 			$personObj->load($personID);
 			
@@ -110,7 +118,7 @@
 		
 		function getCurrentLastName($personID, $lastName, $currentTime){
 			
-			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			$marriage = new Marriages();
 			
 			
 			$marriageRecords = $marriage->findBy([
@@ -119,7 +127,7 @@
 				]
 			]);
 			
-			$marriageController = LoadClass(SiteRoot . '/classes/controllers/people/MarriageController');
+			$marriageController = new MarriageController();
 			
 			$currentLastName = $lastName;
 			

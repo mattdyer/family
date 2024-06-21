@@ -1,5 +1,10 @@
 <?php
-	require_once(SiteRoot . '/classes/models/common/Record.php');
+	
+	namespace classes\models\people;
+
+	use classes\models\common\Record;
+	use classes\models\people\Person;
+
 	class ParentChild extends Record{
 		function __construct(){
 			record::__construct('parentChild','family','familydbphp','root','example');
@@ -58,7 +63,7 @@
 		
 		function translateIdentifiers($records){
 			
-			$person = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$person = new Person();
 			
 			$newRecords = [];
 			

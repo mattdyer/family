@@ -30,9 +30,6 @@
 		
 		function getTreeContent($tree){
 			
-			//$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
-			//$marriageView = LoadClass(SiteRoot . '/classes/views/people/MarriageView');
-
 			$personView = new PeopleView();
 			$marriageView = new MarriageView();
 			

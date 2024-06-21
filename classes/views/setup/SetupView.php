@@ -1,5 +1,7 @@
 <?php
-	//require_once(SiteRoot . '/classes/common/Record.php');
+	
+	namespace classes\views\setup;
+
 	class SetupView{
 		function __construct(){
 			

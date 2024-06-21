@@ -1,4 +1,14 @@
 <?php
+	
+	namespace classes\controllers\display;
+	
+	use classes\controllers\common\Response;
+	use classes\views\people\PeopleView;
+	use classes\controllers\people\PersonController;
+	use classes\views\display\TimeLineView;
+	use classes\models\people\Person;
+	use classes\models\people\Marriages;
+	
 	class TimeLine{
 		function __construct(){
 			
@@ -7,9 +17,9 @@
 		
 		function prepareResponse($url, $form){
 			
-			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
+			$response = new Response();
 			
-			$view = LoadClass(SiteRoot . '/classes/views/display/TimeLineView');
+			$view = new TimeLineView();
 			
 			$items = $this->getSortedItems($url);
 			
@@ -23,8 +33,8 @@
 		
 		function getSortedItems($url){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
-			$marriageObj = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			$personObj = new Person();
+			$marriageObj = new Marriages();
 			
 			$people = $personObj->findBy([
 				'equalsValues' => [
@@ -41,8 +51,8 @@
 			
 			$items = [];
 			
-			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
-			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
+			$personView = new PeopleView();
+			$personController = new PersonController();
 			
 			foreach($people as $person){
 				array_push($items, [

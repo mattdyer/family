@@ -1,4 +1,7 @@
 <?php
+	
+	namespace classes\views\common;
+	
 	class SiteView{
 		function __construct(){
 			

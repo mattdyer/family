@@ -47,17 +47,6 @@
 	
 	define('SiteRoot', $_SERVER['DOCUMENT_ROOT']);
 	
-	function IncludeClass($ClassPath){
-		require_once($ClassPath . '.php');
-		return true;
-	}
-
-	function LoadClass($ClassPath){
-		require_once($ClassPath . '.php');
-		$ClassName = basename($ClassPath);
-		return new $ClassName;
-	}
-
 	require_once(SiteRoot . '/classes/autoload.php');
 	require_once(SiteRoot . '/vendor/autoload.php');
 	

@@ -1,4 +1,7 @@
 <?php
+	
+	namespace classes\models\common;
+	
 	class Record{
 		
 		protected $fields = array();
@@ -311,7 +314,7 @@
 		
 		protected function DoQuery($SQL, $params, $types){
 			
-			$this->mysqli = new mysqli($this->Server, $this->Username, $this->Password);
+			$this->mysqli = new \mysqli($this->Server, $this->Username, $this->Password);
 			$this->mysqli->select_db($this->QueryDatabase);
 			
 			$stmt = $this->mysqli->prepare($SQL);

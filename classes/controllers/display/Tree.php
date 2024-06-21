@@ -1,5 +1,11 @@
 <?php
-	//require_once(SiteRoot . '/classes/common/Record.php');
+	
+	namespace classes\controllers\display;
+
+	use classes\controllers\common\Response;
+	use classes\views\display\TreeView;
+	use classes\controllers\tree\TreeController;
+
 	class Tree{
 		function __construct(){
 			
@@ -8,9 +14,9 @@
 		
 		function prepareResponse($url, $form){
 			
-			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
+			$response = new Response();
 			
-			$view = LoadClass(SiteRoot . '/classes/views/display/TreeView');
+			$view = new TreeView();
 			
 			if(isset($url['personID'])){
 				
@@ -20,7 +26,7 @@
 					$depth = 3;
 				}
 				
-				$treeController = LoadClass(SiteRoot . '/classes/controllers/tree/TreeController');
+				$treeController = new TreeController();
 				
 				$tree = $treeController->getTreeUp($url['personID'], 0, $depth);
 				

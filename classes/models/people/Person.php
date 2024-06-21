@@ -1,5 +1,9 @@
 <?php
-	require_once(SiteRoot . '/classes/models/common/Record.php');
+	
+	namespace classes\models\people;
+
+	use classes\models\common\Record;
+	
 	class Person extends Record{
 		function __construct(){
 			record::__construct('people','family','familydbphp','root','example');

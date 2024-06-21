@@ -1,7 +1,10 @@
 <?php
 	
+	namespace classes\controllers\display;
+
 	use classes\controllers\common\Response;
 	use classes\views\display\TreeView;
+	use classes\controllers\tree\TreeController;
 
 	class TreeDown{
 		function __construct(){
@@ -11,7 +14,6 @@
 		
 		function prepareResponse($url, $form){
 			
-			//$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
 			$response = new Response();
 			
 			$view = new TreeView();
@@ -24,7 +26,7 @@
 					$depth = 3;
 				}
 				
-				$treeController = LoadClass(SiteRoot . '/classes/controllers/tree/TreeController');
+				$treeController = new TreeController();
 				
 				$tree = $treeController->getTreeDown($url['personID'], 0, $depth);
 				

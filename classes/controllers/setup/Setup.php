@@ -1,5 +1,11 @@
 <?php
-	//require_once(SiteRoot . '/classes/common/Record.php');
+	
+	use classes\controllers\common\Response;
+	use classes\views\setup\SetupView;
+	use classes\models\people\Person;
+	use classes\models\people\Marriages;
+	use classes\models\people\ParentChild;
+
 	class Setup{
 		function __construct(){
 			
@@ -10,9 +16,9 @@
 			
 			$this->setupTables();
 			
-			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
+			$response = new Response();
 			
-			$view = LoadClass(SiteRoot . '/classes/views/setup/SetupView');
+			$view = new SetupView();
 			
 			$content = $view->getPageContent();
 			
@@ -24,15 +30,15 @@
 		
 		function setupTables(){
 			
-			$person = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$person = new Person();
 	
 			$person->setupTable($this->getPersonRecords());
 			
-			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
+			$parentChild = new ParentChild();
 	
 			$parentChild->setupTable($this->getParentChildRecords());
 			
-			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			$marriage = new Marriages();
 	
 			$marriage->setupTable($this->getMarriageRecords());
 			

@@ -1,4 +1,11 @@
 <?php
+	
+	namespace classes\views\display;
+
+	use classes\views\people\PeopleView;
+	use classes\controllers\people\PersonController;
+	use classes\models\people\Person;
+	
 	class ListView{
 		function __construct(){
 			
@@ -7,10 +14,10 @@
 		
 		function getDefaultPageContent(){
 			
-			$personView = LoadClass(SiteRoot . '/classes/views/people/PeopleView');
-			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
+			$personView = new PeopleView();
+			$personController = new PersonController();
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$personObj = new Person();
 			
 			$people = $personObj->findBy([
 				'equalsValues' => [

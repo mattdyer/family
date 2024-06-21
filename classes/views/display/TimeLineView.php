@@ -1,4 +1,7 @@
 <?php
+	
+	namespace classes\views\display;
+	
 	class TimeLineView{
 		function __construct(){
 			

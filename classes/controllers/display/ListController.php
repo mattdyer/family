@@ -1,4 +1,10 @@
 <?php
+	
+	namespace classes\controllers\display;
+
+	use classes\controllers\common\Response;
+	use classes\views\display\ListView;
+	
 	class ListController{
 		function __construct(){
 			
@@ -7,9 +13,9 @@
 		
 		function prepareResponse($url, $form){
 			
-			$response = LoadClass(SiteRoot . '/classes/controllers/common/Response');
+			$response = new Response();
 			
-			$view = LoadClass(SiteRoot . '/classes/views/display/ListView');
+			$view = new ListView();
 			
 			$content = $view->getDefaultPageContent();
 				

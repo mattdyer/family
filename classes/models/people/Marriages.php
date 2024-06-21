@@ -1,8 +1,10 @@
 <?php
 	
-	//namespace models\people;
+	namespace classes\models\people;
 
-	require_once(SiteRoot . '/classes/models/common/Record.php');
+	use classes\models\common\Record;
+	use classes\models\people\Person;
+	
 	class Marriages extends Record{
 		function __construct(){
 			record::__construct('marriages','family','familydbphp','root','example');
@@ -82,7 +84,7 @@
 		
 		function translateIdentifiers($records){
 			
-			$person = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$person = new Person();
 			
 			$newRecords = [];
 			

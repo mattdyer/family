@@ -1,4 +1,11 @@
 <?php
+	
+	namespace classes\controllers\tree;
+
+	use classes\controllers\people\PersonController;
+	use classes\models\people\Person;
+	use classes\controllers\people\MarriageController;
+	
 	class TreeController{
 		function __construct(){
 			
@@ -6,7 +13,7 @@
 		
 		function getTreeUp($personID, $depth, $maxDepth){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$personObj = new Person();
 			$personObj->load($personID);
 			
 			$person = $personObj->getFields();
@@ -34,7 +41,7 @@
 		
 		function getTreeDown($personID, $depth, $maxDepth){
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
+			$personObj = new Person();
 			$personObj->load($personID);
 			
 			$tree = [];
@@ -78,7 +85,7 @@
 			
 			
 			if($depth <= $maxDepth){
-				$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
+				$personController = new PersonController();
 				
 				$parents = $personController->getParents($personID);
 				
@@ -114,7 +121,7 @@
 		
 		function addPersonToTreeLevel($treeLevel, $person){
 			
-			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
+			$personController = new PersonController();;
 			
 			array_push($treeLevel['people'], $personController->getDisplayPerson($person['id']));
 			
@@ -124,7 +131,7 @@
 		
 		function addMarriagesToTreeLevel($treeLevel, $personIDs){
 			
-			$marriageController = LoadClass(SiteRoot . '/classes/controllers/people/MarriageController');
+			$marriageController = new MarriageController();
 			
 			$marriages = $marriageController->getMarriages($personIDs);
 			

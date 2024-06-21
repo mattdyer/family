@@ -1,5 +1,9 @@
 <?php
-	use ReallySimpleJWT\Token;	
+	
+	namespace classes\controllers\common;
+	
+	use ReallySimpleJWT\Token;
+	use classes\views\common\SiteView;
 
 	class Site{
 		function __construct(){
@@ -8,7 +12,7 @@
 		
 		
 		function wrapContent($response){
-			$view = LoadClass(SiteRoot . '/classes/views/common/SiteView');
+			$view = new SiteView();
 			
 			$response->setContent($view->mainTemplate($response->getContent()));
 			

@@ -1,4 +1,12 @@
 <?php
+	
+	namespace classes\controllers\people;
+
+	use classes\controllers\people\PersonController;
+	use classes\models\people\Person;
+	use classes\models\people\ParentChild;
+	use classes\models\people\Marriages;
+	
 	class MarriageController{
 		function __construct(){
 			
@@ -7,11 +15,11 @@
 		
 		function getChildren($marriageID){
 			
-			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			$marriage = new Marriages();
 			$marriage->load($marriageID);
 			
-			$personObj = LoadClass(SiteRoot . '/classes/models/people/Person');
-			$parentChild = LoadClass(SiteRoot . '/classes/models/people/ParentChild');
+			$personObj = new Person();
+			$parentChild = new ParentChild();
 			
 			$childRelationships1 = $parentChild->findBy([
 				"equalsValues" => [
@@ -42,8 +50,8 @@
 		
 		function getMarriages($personIDs){
 			
-			$personController = LoadClass(SiteRoot . '/classes/controllers/people/PersonController');
-			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			$personController = new PersonController();;
+			$marriage = new Marriages();
 			
 			$marriageRecords = $this->getMarriageRecordsForPersonIDs($personIDs);
 			
@@ -69,7 +77,7 @@
 		
 		function getMarriageRecordsForPersonIDs($personIDs){
 			
-			$marriage = LoadClass(SiteRoot . '/classes/models/people/Marriages');
+			$marriage = new Marriages();;
 			
 			
 			$marriageRecords = $marriage->findBy([
