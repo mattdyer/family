@@ -1,10 +1,13 @@
 <?php
 	
+	namespace classes\controllers\setup;
+
 	use classes\controllers\common\Response;
 	use classes\views\setup\SetupView;
 	use classes\models\people\Person;
 	use classes\models\people\Marriages;
 	use classes\models\people\ParentChild;
+	use classes\models\common\User;
 
 	class Setup{
 		function __construct(){
@@ -30,6 +33,10 @@
 		
 		function setupTables(){
 			
+			$user = new User();
+
+			$user->setupTable();
+
 			$person = new Person();
 	
 			$person->setupTable($this->getPersonRecords());

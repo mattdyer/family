@@ -7,7 +7,7 @@
 
 	class Site{
 		function __construct(){
-			
+			$this->tokenSecret = 'fjjsf^&fjd7f66dj9au$fdDR';
 		}
 		
 		
@@ -19,15 +19,21 @@
 			return $response;
 		}
 		
-		function getTokenTest(){
-			$userId = 12;
-			$secret = 'sec!ReT423*&';
+		function generateLoginToken(){
+			$userId = 0;
+			
 			$expiration = time() + 3600;
 			$issuer = 'localhost';
 
-			$token = Token::create($userId, $secret, $expiration, $issuer);
+			$token = Token::create($userId, $this->tokenSecret, $expiration, $issuer);
 
 			return $token;
+		}
+
+		function checkLoginToken($token){
+			$result = Token::validate($token, $this->tokenSecret);
+
+			return $result;
 		}
 
 	}

@@ -3,28 +3,49 @@
 	include($_SERVER['DOCUMENT_ROOT'] . "/classes/AppInit.php");
 	
 	use classes\controllers\common\Site;
-	use classes\controllers\display\TimeLine;
 
 	if(isset($_GET['section']) AND isset($_GET['page'])){
 		$site = new Site();
-		$displayControllerName = 'classes\\controllers\\' . $_GET['section'] . '\\' . $_GET['page'];
-
-		$controller = new $displayControllerName();
-
-		$response = $controller->prepareResponse($_GET, $_POST);
 		
-		$response = $site->wrapContent($response);
-		
-		var_dump($site->getTokenTest());
-		
-		$hash = password_hash('test123', PASSWORD_BCRYPT);
+		if(isset($_COOKIE['familyauth']) OR $_GET['page'] == 'Login' OR $_GET['page'] == 'LoginCheck'){
+			if(isset($_COOKIE['familyauth'])){
+				$loginToken = $_COOKIE['familyauth'];
 
-		$valid = password_verify('test123', $hash);
+				$tokenResult = $site->checkLoginToken($loginToken);
+			}else{
+				$tokenResult = true;
+			}
+			
+			if($tokenResult OR $_GET['page'] == 'Login' OR $_GET['page'] == 'LoginCheck'){
+				$displayControllerName = 'classes\\controllers\\' . $_GET['section'] . '\\' . $_GET['page'];
 
-		var_dump($hash);
-		var_dump($valid);
+				$controller = new $displayControllerName();
 
-		print($response->getContent());
+				$response = $controller->prepareResponse($_GET, $_POST);
+
+				if($response->getType() == 'content'){
+					$response = $site->wrapContent($response);
+				
+					print($response->getContent());
+				}
+
+				if($response->getType() == 'redirect'){
+					header("Location: {$response->getRedirectURL()}");
+					die();
+				}
+				
+				
+			}else{
+				header("Location: index.php?section=display&page=Login");
+				die();
+			}
+		}else{
+			header("Location: index.php?section=display&page=Login");
+			die();	
+		}
+	}else{
+		header("Location: index.php?section=display&page=Login");
+		die();
 	}
 	
 	
