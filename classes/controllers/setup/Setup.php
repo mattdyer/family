@@ -18,18 +18,37 @@
 		function prepareResponse($url, $form){
 			
 			$this->setupTables();
+
+			$password = $this->createInitialUser();
 			
 			$response = new Response();
 			
 			$view = new SetupView();
 			
-			$content = $view->getPageContent();
+			$content = $view->getPageContent($password);
 			
 			$response->setContent($content);
 			
 			return $response;
 		}
 		
+
+		function createInitialUser(){
+			$user = new User();
+
+			$user->updateAttributes(
+				[
+					'username' => 'user1'
+				]
+			);
+
+			$user->save();
+
+			$password = $user->generatePassword();
+
+			return $password;
+		}
+
 		
 		function setupTables(){
 			

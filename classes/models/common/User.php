@@ -9,7 +9,18 @@
 			record::__construct('users','family','familydbphp','root','example');
 		}
 		
-		
+
+		function generatePassword(){
+
+			$password = 'SuperSecret';
+
+			$this->set('password', $password);
+			$this->save();
+
+			return $password;
+		}
+
+
 		function setupTable(){
 			
 			$tableName = $this->TableName;
@@ -31,13 +42,6 @@
 				],
 				[
 					"name" => "password",
-					"type" => "varchar(255)",
-					"primaryKey" => false,
-					"allowNull" => false,
-					"extra" => ""
-				],
-				[
-					"name" => "salt",
 					"type" => "varchar(255)",
 					"primaryKey" => false,
 					"allowNull" => false,

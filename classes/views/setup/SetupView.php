@@ -8,8 +8,9 @@
 		}
 		
 		
-		function getPageContent(){
-			return 'Setup Complete';
+		function getPageContent($password){
+			
+			return 'Setup Complete password ' . $password;
 		}
 		
 		
