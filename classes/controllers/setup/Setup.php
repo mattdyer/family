@@ -19,7 +19,9 @@
 			
 			$this->setupTables();
 
-			$password = $this->createInitialUser();
+			$password = $form['startingPassword'];
+
+			$this->createInitialUser($password);
 			
 			$response = new Response();
 			
@@ -33,20 +35,20 @@
 		}
 		
 
-		function createInitialUser(){
+		function createInitialUser($startingPassword){
 			$user = new User();
 
 			$user->updateAttributes(
 				[
-					'username' => 'user1'
+					'username' => 'user1',
+					'password' => 'temp'
 				]
 			);
 
 			$user->save();
 
-			$password = $user->generatePassword();
+			$user->setPassword($startingPassword);
 
-			return $password;
 		}
 
 		

@@ -98,7 +98,7 @@
 			
 			
 			if($record->num_rows == 0){
-				throw new Exception('No record was found in ' . $this->TableName .  ' for ID ' . $ID);
+				throw new \Exception('No record was found in ' . $this->TableName .  ' for ID ' . $ID);
 			}
 			
 			while($row = $record->fetch_array()){
@@ -114,7 +114,7 @@
 			$records = $this->findBy($values);
 			
 			if(sizeof($records) != 1){
-				throw new Exception(sizeof($records) . " records found in ' . $this->TableName .  ' for provided values. Expected 1." . json_encode($values));
+				throw new \Exception(sizeof($records) . " records found in ' . $this->TableName .  ' for provided values. Expected 1." . json_encode($values));
 			}
 			
 			$row = $records[0];

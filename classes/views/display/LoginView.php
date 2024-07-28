@@ -9,15 +9,15 @@
 		
 		function getDefaultPageContent(){
 			ob_start();
-				print_r('<div class="login-form">');
-                    print_r('<form method="Post" action="?section=auth&page=LoginCheck">');
-                        print_r('<input type="text" name="Password">');
-                        print_r('<input type="submit" name="Submit" value="Submit">');
-                    print_r('</form>');
-
-				
-				print_r('</div>');
-				
+				?>
+				<div class="login-form">
+                    <form method="Post" action="?section=auth&page=LoginCheck">
+						<input type="text" name="Username" placeholder="username">
+						<input type="text" name="Password" placeholder="password">
+                        <input type="submit" name="Submit" value="Submit">
+                    </form>
+				</div>
+				<?php
 				$content = ob_get_contents();
 			ob_end_clean();
 			

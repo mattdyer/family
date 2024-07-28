@@ -8,6 +8,7 @@
 	use classes\views\display\TimeLineView;
 	use classes\models\people\Person;
 	use classes\models\people\Marriages;
+	use classes\models\common\User;
 	
 	class TimeLine{
 		function __construct(){
@@ -17,6 +18,11 @@
 		
 		function prepareResponse($url, $form){
 			
+			$user = new User();
+			$user->load(1);
+
+			echo($user->get('password'));
+
 			$response = new Response();
 			
 			$view = new TimeLineView();

@@ -21,6 +21,15 @@
 		}
 
 
+		function setPassword($plainPassword){
+			
+			
+			
+			$this->set('password', $plainPassword);
+			$this->save();
+		}
+
+
 		function setupTable(){
 			
 			$tableName = $this->TableName;

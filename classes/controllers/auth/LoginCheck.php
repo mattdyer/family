@@ -4,6 +4,7 @@
 
     use classes\controllers\common\Site;
     use classes\controllers\common\Response;
+    use classes\models\common\User;
 
 	class LoginCheck{
 		function __construct(){
@@ -15,6 +16,14 @@
 			$response = new Response();
 			
 			$response->setType('redirect');
+
+            $user = new User();
+
+            $user->loadBy([
+                'equalsValues' => [
+                    'username' => $form['Username']
+                ]
+            ]);
 
 
             if(isset($_POST['Password']) AND $_POST['Password'] == 'SecretPassword'){
