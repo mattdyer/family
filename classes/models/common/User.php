@@ -10,7 +10,7 @@
 		}
 		
 
-		function generatePassword(){
+		/*function generatePassword(){
 
 			$password = 'SuperSecret';
 
@@ -18,15 +18,27 @@
 			$this->save();
 
 			return $password;
-		}
+		}*/
 
 
 		function setPassword($plainPassword){
 			
+			$options = [
+				'cost' => 12,
+			];
 			
+			$hashedPassword = password_hash($plainPassword, PASSWORD_BCRYPT, $options);
 			
-			$this->set('password', $plainPassword);
+			$this->set('password', $hashedPassword);
 			$this->save();
+		}
+
+
+		function verifyPassword($plainPassword){
+
+			$result = password_verify($plainPassword, $this->get('password'));
+
+			return $result;
 		}
 
 

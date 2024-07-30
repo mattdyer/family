@@ -26,7 +26,7 @@
             ]);
 
 
-            if(isset($_POST['Password']) AND $_POST['Password'] == 'SecretPassword'){
+            if(isset($form['Password']) AND $user->verifyPassword($form['Password'])){
 
                 $site = new Site();
 
@@ -34,11 +34,11 @@
 
                 setcookie('familyauth', $loginToken, 0, '/', '', false, true);
 
-                $response->setRedirectURL('?section=display&page=ListController');
+                $response->setRedirectURL('?section=display&page=ListController&loginsuccess=1');
 
             }else{
 
-                $response->setRedirectURL('?section=display&page=Login');
+                $response->setRedirectURL('?section=display&page=Login&error=nopassword');
 
             }
 

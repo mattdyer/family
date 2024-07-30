@@ -7,7 +7,9 @@
 	if(isset($_GET['section']) AND isset($_GET['page'])){
 		$site = new Site();
 		
-		if(isset($_COOKIE['familyauth']) OR $_GET['page'] == 'Login' OR $_GET['page'] == 'LoginCheck'){
+		$skipLoginPage = in_array($_GET['page'], ['Login', 'LoginCheck', 'Setup', 'SetupOptions']);	
+
+		if(isset($_COOKIE['familyauth']) OR $skipLoginPage){
 			if(isset($_COOKIE['familyauth'])){
 				$loginToken = $_COOKIE['familyauth'];
 
@@ -16,7 +18,7 @@
 				$tokenResult = true;
 			}
 			
-			if($tokenResult OR $_GET['page'] == 'Login' OR $_GET['page'] == 'LoginCheck'){
+			if($tokenResult OR $skipLoginPage){
 				$displayControllerName = 'classes\\controllers\\' . $_GET['section'] . '\\' . $_GET['page'];
 
 				$controller = new $displayControllerName();
@@ -36,15 +38,15 @@
 				
 				
 			}else{
-				header("Location: index.php?section=display&page=Login");
+				header("Location: index.php?section=display&page=Login&origin=3");
 				die();
 			}
 		}else{
-			header("Location: index.php?section=display&page=Login");
+			header("Location: index.php?section=display&page=Login&origin=2");
 			die();	
 		}
 	}else{
-		header("Location: index.php?section=display&page=Login");
+		header("Location: index.php?section=display&page=Login&origin=1");
 		die();
 	}
 	
