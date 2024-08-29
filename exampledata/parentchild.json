@@ -1,0 +1,10 @@
+[
+	{
+		"parentID" : "JimSmith1960-01-01",
+		"childID" : "JaneSmith1982-01-01"
+	},
+	{
+		"parentID" : "JoanJones1960-01-01",
+		"childID" : "JaneSmith1982-01-01"
+	}
+]

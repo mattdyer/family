@@ -1,0 +1,14 @@
+[
+	{
+		"spouseID1" : "JohnDoe1980-01-01",
+		"spouseID2" : "JaneSmith1982-01-01",
+		"startDate" : "2010-01-01",
+		"lastName" : "Doe"
+	},
+	{
+		"spouseID1" : "JimSmith1960-01-01",
+		"spouseID2" : "JoanJones1960-01-01",
+		"startDate" : "1980-01-01",
+		"lastName" : "Smith-Jones"
+	}
+]

@@ -1,0 +1,26 @@
+[
+	{
+		"firstName" : "John",
+		"lastName" : "Doe",
+		"birthDate" : "1980-01-01",
+		"live" : 1
+	},
+	{
+		"firstName" : "Jane",
+		"lastName" : "Smith",
+		"birthDate" : "1982-01-01",
+		"live" : 1
+	},
+	{
+		"firstName" : "Jim",
+		"lastName" : "Smith",
+		"birthDate" : "1960-01-01",
+		"live" : 1
+	},
+	{
+		"firstName" : "Joan",
+		"lastName" : "Jones",
+		"birthDate" : "1960-01-01",
+		"live" : 1
+	}
+]
