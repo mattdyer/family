@@ -18,10 +18,10 @@
 		
 		function prepareResponse($url, $form){
 			
-			$user = new User();
-			$user->load(1);
+			//$user = new User();
+			//$user->load(1);
 
-			echo($user->get('password'));
+			//echo($user->get('password'));
 
 			$response = new Response();
 			

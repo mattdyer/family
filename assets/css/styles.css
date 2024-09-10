@@ -72,7 +72,7 @@ body{
 	padding: 0 4px;
 }
 
-.timeline-item:focus{
+.timeline-item:focus, .timeline-item:focus-within{
 	z-index: 50;
 	left: 10em;
 	transition-delay: 0s;
@@ -81,7 +81,7 @@ body{
 
 .timeline-item:hover{
 	z-index: 100;
-	left: 5em;
+	
 	transition-delay: 0s;
 	border: 1px solid #ccc;
 }
@@ -95,8 +95,15 @@ body{
 	background-color: #ccecee;
 }
 
-.timeline-item:hover .person-container, .timeline-item:focus .person-container{
+.timeline-item:hover .person-container, .timeline-item:focus .person-container, .timeline-item:focus-within .person-container{
 	background-color: #ddfdff;
+}
+
+.timeline-item:has(input:checked){
+	
+	left: 10em;
+	transition-delay: 0s;
+	border: 1px dashed #ccc;
 }
 
 .list-view-item{

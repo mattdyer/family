@@ -32,7 +32,10 @@
 							$top = $yearValueAdjusted * $yearScaleValue;
 							
 							echo("<div class=\"timeline-item\" style=\"top: {$top}px\" tabindex=\"0\">");
+							echo("<label>");
+							echo("<input type=\"checkbox\">");
 							echo($item['date'] . ' ' . $item['display']);
+							echo("</label>");
 							echo('</div>');
 						}
 					echo('</div>');
