@@ -51,7 +51,17 @@
 				}
 				$this->fields[$column] = '';
 				$this->types[$column] = $type[0];
+
+				$this->mysqliTypes[$column] = 's';
+
+				if($type[0] == 'int' or $type[0] == 'bit'){
+					$this->mysqliTypes[$column] = 'i';
+				}
+
 			}
+
+			//var_dump($this->types);
+
 			$this->KeyList = $this->IDColumn;
 			foreach($this->fields as $key => $value){
 				if($key != $this->IDColumn){
@@ -130,13 +140,18 @@
 						   FROM $this->TableName
 						   WHERE ";
 			
+			$params = [];
+			$types = '';
+
 			if(isset($values['equalsValues'])){
 				foreach($values['equalsValues'] as $key => $value){
 					if(isset($this->fields[$key])){
+						array_push($params, $value);
+						$types = $types . $this->mysqliTypes[$key];
 						if(in_array($this->types[$key],$this->QuotedTypes)){
-							$findSQL = $findSQL . "`$key` = '$value' AND";
+							$findSQL = $findSQL . "`$key` = ? AND";
 						}else{
-							$findSQL = $findSQL . "`$key` = $value AND";
+							$findSQL = $findSQL . "`$key` = ? AND";
 						}
 					}
 				}
@@ -148,10 +163,18 @@
 			if(isset($values['inListValues'])){
 				foreach($values['inListValues'] as $key => $value){
 					if(isset($this->fields[$key]) AND sizeof($value)){
+						
+						$questionMarks = array_map(function(){
+							return '?';
+						}, $value);
+
+						array_push($params, ...$value);
+						$types = $types . str_repeat($this->mysqliTypes[$key], sizeof($value));
+						
 						if(in_array($this->types[$key],$this->QuotedTypes)){
-							$findSQL = $findSQL . "`$key` IN (" . join("','", $value) . ") AND";
+							$findSQL = $findSQL . "`$key` IN (" . join("','", $questionMarks) . ") AND";
 						}else{
-							$findSQL = $findSQL . "`$key` IN (" . join(",", $value) . ") AND";
+							$findSQL = $findSQL . "`$key` IN (" . join(",", $questionMarks) . ") AND";
 						}
 					}else{
 						$findSQL = $findSQL . "1 = 0 AND";
@@ -176,7 +199,7 @@
 			//var_dump($findSQL);
 			//die('dfs');
 			
-			$records = $this->DoQuery($findSQL, [], '');
+			$records = $this->DoQuery($findSQL, $params, $types);
 			
 			$results = [];
 			
@@ -194,17 +217,26 @@
 				$valuelist = '';
 				$keylist = '';
 				$count = 0;
+
+				$params = [];
+				$types = '';
+
 				foreach($this->fields as $key => $thisvalue){
 					if($key != $this->IDColumn){
 						$count++;
 						if(in_array($this->types[$key],$this->QuotedTypes)){
-							$value = "'" . $thisvalue ."'";
+							$value = "?";
 						}else{
-							$value = $thisvalue;
+							$value = "?";
 						}
 						if(strlen($thisvalue) == 0){
 							$value = 'NULL';
+							//array_push($params, 'NULL');
+						}else{
+							array_push($params, $thisvalue);
+							$types = $types . $this->mysqliTypes[$key];
 						}
+
 						if($count > 1){
 							$keylist = $keylist . ',' . $key;
 							$valuelist = $valuelist . ',' . $value;
@@ -218,22 +250,30 @@
 				$result = $this->DoQuery("INSERT INTO $this->TableName
 								($keylist)
 								VALUES
-								($valuelist);", [], '');
+								($valuelist);", $params, $types);
 				$this->fields[$this->IDColumn] = $this->mysqli->insert_id;
 			}else{
 				$keyvalues = '';
 				$count = 0;
+
+				$params = [];
+				$types = '';
+
 				foreach($this->fields as $key => $thisvalue){
 					if($key != $this->IDColumn){
 						$count++;
 						if(in_array($this->types[$key],$this->QuotedTypes)){
-							$value = "'" . $thisvalue ."'";
+							$value = "?";
 						}else{
-							$value = $thisvalue;
+							$value = "?";
 						}
 						if(strlen($thisvalue) == 0){
 							$value = 'NULL';
+						}else{
+							array_push($params, $thisvalue);
+							$types = $types . $this->mysqliTypes[$key];
 						}
+
 						if($count > 1){
 							$keyvalues = $keyvalues . ',' . $key . '=' . $value;
 						}else{
@@ -246,7 +286,7 @@
 				
 				$QueryString = "UPDATE $this->TableName SET $keyvalues WHERE $this->IDColumn = $IDValue;";
 				
-				$this->DoQuery($QueryString, [], '');
+				$this->DoQuery($QueryString, $params, $types);
 			}
 			$this->afterSave();
 		}
@@ -318,8 +358,11 @@
 			$this->mysqli->select_db($this->QueryDatabase);
 			
 			$stmt = $this->mysqli->prepare($SQL);
-			
+
 			$this->LastSQL = $SQL;
+
+			//var_dump($SQL);
+			//var_dump($stmt);
 			
 			if(sizeof($params)){
 				$stmt->bind_param($types, ...$params);

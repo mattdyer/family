@@ -1,6 +1,6 @@
 Getting Started
 
-Copy the json files from exampledata/ into data/.  These can be modifed to include your family.
+Copy the json files from exampledata/ into data/.  These can be modified to include your family.
 
 Then run 
 
